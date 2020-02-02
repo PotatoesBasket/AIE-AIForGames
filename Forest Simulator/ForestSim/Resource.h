@@ -9,7 +9,7 @@ public:
 	template<typename... Args>
 	Resource(const std::string filename, Args... args) : ResourceBase(filename)
 	{
-		m_data = std::unique_ptr<T>(new T(filename.c_str(), args...));
+		m_data = std::make_unique<T>(filename.c_str(), args...);
 	}
 	~Resource() {}
 
