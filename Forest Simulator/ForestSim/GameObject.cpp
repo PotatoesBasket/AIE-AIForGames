@@ -49,12 +49,6 @@ void GameObject::draw(std::shared_ptr<aie::Renderer2D> renderer)
 //   Transform   //
 ///////////////////
 
-void GameObject::resetTransform()
-{
-	m_localTransform = Matrix3::identity;
-	m_globalTransform = Matrix3::identity;
-}
-
 void GameObject::move(float x, float y)
 {
 	m_localTransform.move(x, y);
@@ -81,6 +75,12 @@ void GameObject::scale(float multiplier)
 {
 	m_localTransform.scale(Vector3(multiplier, multiplier, 1));
 	updateTransform();
+}
+
+void GameObject::resetTransform()
+{
+	m_localTransform = Matrix3::identity;
+	m_globalTransform = Matrix3::identity;
 }
 
 

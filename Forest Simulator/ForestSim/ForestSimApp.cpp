@@ -2,13 +2,16 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
-#include "ObjectPool.h"
+#include "ScreenDefines.h"
 
 bool ForestSimApp::startup()
 {	
 	m_2dRenderer = std::make_unique<aie::Renderer2D>();
+
 	m_map = std::make_unique<Map>();
 	m_bunnyPool = std::make_unique<ObjectPool>(20);
+
+	m_currentPanSpeed = m_panSpeed;
 
 	//position camera in centre of map
 	m_camPos = Vector2(
@@ -16,10 +19,6 @@ bool ForestSimApp::startup()
 		(m_map->getMapHeight() - SCR_HEIGHT) * 0.5f);
 
 	return true;
-}
-
-void ForestSimApp::shutdown()
-{
 }
 
 void ForestSimApp::update(float deltaTime)

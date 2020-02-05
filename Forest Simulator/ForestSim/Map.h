@@ -12,15 +12,19 @@ public:
 
 	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;
 
+	void loadMap();
+
+	std::list<std::unique_ptr<Tile>>& getTiles() { return m_tiles; }
 	unsigned int getTileSize() const { return m_tileSize; }
 	unsigned int getMapWidth() const { return m_tileSize * m_mapCols; }
 	unsigned int getMapHeight() const { return m_tileSize * m_mapRows; }
 
 private:
 	//map data
+	const char* m_mapData;
 	const unsigned int m_tileSize = 72;
-	const unsigned int m_mapCols = 50;
-	const unsigned int m_mapRows = 50;
+	unsigned int m_mapCols = 0;
+	unsigned int m_mapRows = 0;
 
 	std::list<std::unique_ptr<Tile>> m_tiles;
 

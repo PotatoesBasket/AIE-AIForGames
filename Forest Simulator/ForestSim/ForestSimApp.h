@@ -3,8 +3,6 @@
 #include "Renderer2D.h"
 #include "ObjectPool.h"
 #include "Map.h"
-#include "RNG.h"
-#include "ScreenDefines.h"
 
 class ForestSimApp : public aie::Application
 {
@@ -13,7 +11,7 @@ public:
 	virtual ~ForestSimApp() {}
 
 	virtual bool startup();
-	virtual void shutdown();
+	virtual void shutdown() {}
 
 	virtual void update(float deltaTime);
 	virtual void draw();
@@ -22,7 +20,7 @@ public:
 
 protected:
 	Vector2 m_camPos;
-	float m_currentPanSpeed = 400;
+	float m_currentPanSpeed = 0;
 	const float m_panSpeed = 400;
 	const float m_fastPanSpeed = 800;
 

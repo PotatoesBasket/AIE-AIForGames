@@ -16,11 +16,26 @@
     <Filter Include="Objects">
       <UniqueIdentifier>{99d10c80-a8ab-4318-99f5-9a150a528b66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{89d29b57-ff29-4cfb-b191-476366e0479a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Managers">
       <UniqueIdentifier>{77a2be98-e164-48cd-b169-65ef3ff84e82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours">
+      <UniqueIdentifier>{7e50a2b6-b8d8-4a85-86c1-c9a0dd581ee3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Base">
+      <UniqueIdentifier>{2791f3c4-bb8c-4da6-9af8-a270c41a07c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Decorators">
+      <UniqueIdentifier>{62857c89-c0a4-4c58-8610-2f532bc0eafb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Steering">
+      <UniqueIdentifier>{eae89347-68c4-461e-8f00-df01d5622b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Steering\Forces">
+      <UniqueIdentifier>{4270aad6-a7ac-4ba5-ba91-df04600762cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pathfinding">
+      <UniqueIdentifier>{21f04bb5-1e88-4657-9817-ef726e62dc5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,9 +50,6 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Forest.cpp">
-      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Animal.cpp">
       <Filter>Objects</Filter>
@@ -57,6 +69,27 @@
     <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Composite.cpp">
+      <Filter>Behaviours\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="InverseDecorator.cpp">
+      <Filter>Behaviours\Decorators</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehaviour.cpp">
+      <Filter>Behaviours\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="FlowSteering.cpp">
+      <Filter>Behaviours\Steering\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="SeekSteering.cpp">
+      <Filter>Behaviours\Steering\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="FlowField.cpp">
+      <Filter>Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Pathfinding.cpp">
+      <Filter>Pathfinding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ForestSimApp.h">
@@ -73,9 +106,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Forest.h">
-      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Animal.h">
       <Filter>Objects</Filter>
@@ -114,6 +144,51 @@
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="ScreenDefines.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Composite.h">
+      <Filter>Behaviours\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="IBehaviour.h">
+      <Filter>Behaviours\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Decorator.h">
+      <Filter>Behaviours\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Selector.h">
+      <Filter>Behaviours\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence.h">
+      <Filter>Behaviours\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="InverseDecorator.h">
+      <Filter>Behaviours\Decorators</Filter>
+    </ClInclude>
+    <ClInclude Include="ISteering.h">
+      <Filter>Behaviours\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviour.h">
+      <Filter>Behaviours\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="FleeSteering.h">
+      <Filter>Behaviours\Steering\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="FlowSteering.h">
+      <Filter>Behaviours\Steering\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="SeekSteering.h">
+      <Filter>Behaviours\Steering\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="FlowField.h">
+      <Filter>Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathfinding.h">
+      <Filter>Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="ColourDefines.h">
       <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>

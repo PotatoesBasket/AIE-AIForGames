@@ -163,26 +163,45 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animal.cpp" />
-    <ClCompile Include="Forest.cpp" />
+    <ClCompile Include="Composite.cpp" />
+    <ClCompile Include="FlowField.cpp" />
+    <ClCompile Include="FlowSteering.cpp" />
     <ClCompile Include="ForestSimApp.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="InverseDecorator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
+    <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="AnimatedSprite.cpp" />
+    <ClCompile Include="SeekSteering.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SteeringBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animal.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="ColourDefines.h" />
+    <ClInclude Include="Composite.h" />
+    <ClInclude Include="Decorator.h" />
     <ClInclude Include="FilePaths.h" />
-    <ClInclude Include="Forest.h" />
+    <ClInclude Include="FleeSteering.h" />
+    <ClInclude Include="FlowField.h" />
+    <ClInclude Include="FlowSteering.h" />
     <ClInclude Include="ForestSimApp.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="AnimatedSprite.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="IBehaviour.h" />
+    <ClInclude Include="InverseDecorator.h" />
+    <ClInclude Include="ISteering.h" />
+    <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="ScreenDefines.h" />
+    <ClInclude Include="SeekSteering.h" />
+    <ClInclude Include="Selector.h" />
+    <ClInclude Include="Sequence.h" />
     <ClInclude Include="Spritesheets.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="ObjectPool.h" />
@@ -193,6 +212,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SteeringBehaviour.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

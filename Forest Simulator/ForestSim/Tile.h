@@ -14,7 +14,7 @@ public:
 		rock
 	};
 	
-	Tile(Type type, Vector2 position) : m_type(type) { move(position); }
+	Tile(Type type, Vector2 position) : m_type(type) { setPosition(position); }
 	~Tile() {}
 
 	Type const getType() { return m_type; }

@@ -37,12 +37,11 @@ public:
 	float* getLocalTransformFloat() const { return (float*)& m_localTransform; }
 	float* getGlobalTransformFloat() const { return (float*)& m_globalTransform; }
 
-	Vector2 getPosition() { return (Vector2(m_globalTransform.translation.x, m_globalTransform.translation.y)); }
-
 	void setLocalTransform(const Matrix3& m) { m_localTransform = m; }
 	void setGlobalTransform(const Matrix3& m) { m_globalTransform = m; }
 
-	void resetTransform();
+	void setPosition(Vector2 position) { m_globalTransform.translation = position; }
+	Vector2 getPosition() const { return (Vector2(m_globalTransform.translation.x, m_globalTransform.translation.y)); }
 
 	void move(float x, float y);
 	void move(const Vector2& v);
@@ -51,6 +50,8 @@ public:
 
 	void scale(float wMultiplier, float hMultiplier);
 	void scale(float multiplier);
+
+	void resetTransform();
 
 	////////////////
 	// COMPONENTS //
@@ -74,6 +75,15 @@ public:
 	void addChild(const std::shared_ptr<GameObject>& child);
 	void removeChild(const std::shared_ptr<GameObject>& child);
 
+	//////////////////////////
+	// AI STUFF, MOVE LATER //
+	//////////////////////////
+
+	void addForce(Vector2 force) { m_velocity += force; }
+
+	Vector2 getVelocity() const { return m_velocity; }
+	float getMaxForce() const { return m_maxForce; }
+
 protected:
 	bool m_active = true;
 
@@ -84,6 +94,9 @@ protected:
 
 	GameObject* m_parent = nullptr;
 	std::vector<std::shared_ptr<GameObject>> m_children;
+
+	Vector2 m_velocity;
+	float m_maxForce;
 };
 
 class Component
