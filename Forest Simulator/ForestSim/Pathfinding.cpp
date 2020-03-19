@@ -3,8 +3,6 @@
 #include <unordered_set>
 #include <algorithm>
 
-//note: if all heuristicCosts are 0, that's Dijkstra's algorithm
-
 std::list<Node*> Pathfinding::getPathAStar(Node* startNode, Node* endNode, float heuristic)
 {
 	//error checks
@@ -50,7 +48,7 @@ std::list<Node*> Pathfinding::getPathAStar(Node* startNode, Node* endNode, float
 		for (auto& edge : currentNode->outgoingEdges)
 		{
 			//if destinationNode has not yet been fully processed...
-			if (std::find(closedList.begin(), closedList.end(), edge.destinationNode) == closedList.end())
+			if (std::find(closedList.begin(), closedList.end(), edge.targetNode) == closedList.end())
 			{
 				//calculate costs
 				float runningCost = currentNode->runningCost + edge.cost;
@@ -58,20 +56,20 @@ std::list<Node*> Pathfinding::getPathAStar(Node* startNode, Node* endNode, float
 				float finalCost = runningCost + heuristicCost;
 
 				//if destinationNode has not already been visited...
-				if (std::find(openList.begin(), openList.end(), edge.destinationNode) == openList.end())
+				if (std::find(openList.begin(), openList.end(), edge.targetNode) == openList.end())
 				{
 					//update values and add to openList
-					edge.destinationNode->runningCost = runningCost;
-					edge.destinationNode->finalCost = finalCost;
-					edge.destinationNode->parentNode = currentNode;
-					openList.push_back(edge.destinationNode);
+					edge.targetNode->runningCost = runningCost;
+					edge.targetNode->finalCost = finalCost;
+					edge.targetNode->parentNode = currentNode;
+					openList.push_back(edge.targetNode);
 				}
 				//otherwise, compare new cost with old cost and overwrite if necessary
-				else if (runningCost < edge.destinationNode->runningCost)
+				else if (runningCost < edge.targetNode->runningCost)
 				{
-					edge.destinationNode->runningCost = runningCost;
-					edge.destinationNode->finalCost = finalCost;
-					edge.destinationNode->parentNode = currentNode;
+					edge.targetNode->runningCost = runningCost;
+					edge.targetNode->finalCost = finalCost;
+					edge.targetNode->parentNode = currentNode;
 				}
 			}
 		}

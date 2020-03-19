@@ -1,8 +1,9 @@
 #pragma once
 #include "Application.h"
 #include "Renderer2D.h"
-#include "ObjectPool.h"
 #include "Map.h"
+#include "Bunny.h"
+#include "Fox.h"
 
 class ForestSimApp : public aie::Application
 {
@@ -16,19 +17,19 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+private:
+	void initCamera();
 	void camControls(float deltaTime);
 
 protected:
+	std::shared_ptr<aie::Renderer2D> m_2dRenderer = nullptr;
+	std::unique_ptr<Map> m_map = nullptr;
+
 	Vector2 m_camPos;
 	float m_currentPanSpeed = 0;
 	const float m_panSpeed = 400;
-	const float m_fastPanSpeed = 800;
+	const float m_fastPanSpeed = 1000;
+	unsigned int m_zoomLevel = 1;
 
 	bool m_zoomInputPressed = false;
-	bool m_zoomedOut = false;
-
-	std::shared_ptr<aie::Renderer2D> m_2dRenderer = nullptr;
-
-	std::unique_ptr<Map> m_map = nullptr;
-	std::unique_ptr<ObjectPool> m_bunnyPool = nullptr;
 };

@@ -2,7 +2,11 @@
 #include "GameObject.h"
 #include "ResourceBase.h"
 #include "Tile.h"
-#include <list>
+#include "RNG.h"
+#include "Agent.h"
+#include "Grass.h"
+
+class AABB;
 
 class Map : public GameObject
 {
@@ -10,29 +14,48 @@ public:
 	Map();
 	~Map() {}
 
+	void onUpdate(float deltaTime) override;
 	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;
 
-	void loadMap();
+	Vector2 getRandomTraversablePos();
+	Node* getNodeAtPosition(float xPos, float yPos);
 
-	std::list<std::unique_ptr<Tile>>& getTiles() { return m_tiles; }
 	unsigned int getTileSize() const { return m_tileSize; }
-	unsigned int getMapWidth() const { return m_tileSize * m_mapCols; }
-	unsigned int getMapHeight() const { return m_tileSize * m_mapRows; }
+	unsigned int getMapWidthCells() const { return m_mapCols; }
+	unsigned int getMapHeightCells() const { return m_mapRows; }
+	unsigned int getMapWidthPx() const { return m_tileSize * m_mapCols; }
+	unsigned int getMapHeightPx() const { return m_tileSize * m_mapRows; }
+
+	std::vector<std::unique_ptr<Tile>>& getTiles() { return m_tiles; }
+	std::vector<std::unique_ptr<AABB>>& getObstacles() { return m_obstacles; }
+	std::vector<std::unique_ptr<Agent>>& getBunnies() { return m_bunnies; }
+	std::vector<std::unique_ptr<Agent>>& getFoxes() { return m_foxes; }
+	std::vector<std::unique_ptr<Grass>>& getGrass() { return m_grassPatches; }
 
 private:
-	//map data
-	const char* m_mapData;
-	const unsigned int m_tileSize = 72;
-	unsigned int m_mapCols = 0;
-	unsigned int m_mapRows = 0;
+	void loadMapData();
+	void setMapConnections();
+	void createObstacle(float x, float y);
 
-	std::list<std::unique_ptr<Tile>> m_tiles;
-
+private:
 	//tileset data
-	const unsigned int m_sheetCols = 2;
+	const unsigned int m_sheetCols = 5;
 	const unsigned int m_sheetRows = 1;
 	float m_percentWidth = 0;
 	float m_percentHeight = 0;
 
 	std::shared_ptr<ResourceBase> m_tileset;
+
+	//map data
+	const unsigned int m_tileSize = 72;
+	unsigned int m_mapCols = 50;
+	unsigned int m_mapRows = 50;
+
+	std::vector<std::unique_ptr<Tile>> m_tiles; //nodes for pathing
+
+	//object data
+	std::vector<std::unique_ptr<AABB>> m_obstacles;
+	std::vector<std::unique_ptr<Agent>> m_bunnies;
+	std::vector<std::unique_ptr<Agent>> m_foxes;
+	std::vector<std::unique_ptr<Grass>> m_grassPatches;
 };

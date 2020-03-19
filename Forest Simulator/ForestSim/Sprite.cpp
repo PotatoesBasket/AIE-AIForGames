@@ -1,15 +1,10 @@
 #include "Sprite.h"
 
-Sprite::Sprite(Spritesheet sheet)
-{
-	loadSprite(sheet);
-}
-
-void Sprite::loadSprite(Spritesheet sheet)
+void Sprite::loadSprite(SpriteInfo sheet)
 {
 	m_texture = ResourceManager::getInstance().loadTexture(sheet.path);
-	m_spriteWidth = sheet.width;
-	m_spriteHeight = sheet.height;
+	m_spriteWidth = sheet.tileWidth;
+	m_spriteHeight = sheet.tileHeight;
 
 	if (m_spriteWidth <= 0 || m_spriteHeight <= 0)
 		throw new std::exception("invalid sprite size");

@@ -5,7 +5,7 @@
 class Decorator : public IBehaviour
 {
 public:
-	virtual Result update(GameObject* object, float deltaTime) = 0;
+	virtual Result update(Agent* agent, float deltaTime) = 0;
 
 	void setChild(std::shared_ptr<IBehaviour> child) { m_child = child; }
 

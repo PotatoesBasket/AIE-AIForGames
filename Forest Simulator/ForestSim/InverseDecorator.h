@@ -3,5 +3,5 @@
 
 class InverseDecorator : public Decorator
 {
-	Result update(GameObject* object, float deltaTime) override;
+	Result update(Agent* agent, float deltaTime) override;
 };

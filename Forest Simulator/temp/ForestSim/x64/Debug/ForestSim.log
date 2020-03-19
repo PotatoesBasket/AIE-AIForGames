@@ -1,5 +1,2 @@
-﻿  Map.cpp
-C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Map.cpp(31): warning C4244: 'argument': conversion from 'const unsigned int' to 'float', possible loss of data
-C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Map.cpp(58): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Map.cpp(68): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+﻿  Life.cpp
   ForestSim.vcxproj -> C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\temp\ForestSim\x64\Debug\ForestSim.exe

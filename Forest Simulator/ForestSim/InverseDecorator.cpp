@@ -1,8 +1,8 @@
 #include "InverseDecorator.h"
 
-IBehaviour::Result InverseDecorator::update(GameObject* object, float deltaTime)
+IBehaviour::Result InverseDecorator::update(Agent* agent, float deltaTime)
 {
-	Result result = m_child->update(object, deltaTime);
+	Result result = m_child->update(agent, deltaTime);
 
 	switch (result)
 	{

@@ -5,7 +5,9 @@
 #include <Release/MathLibrary.h>
 #endif
 
-class GameObject;
+class Agent;
+
+//Base class for all behaviours
 
 class IBehaviour
 {
@@ -18,7 +20,7 @@ public:
 		ONGOING
 	};
 
-	virtual Result update(GameObject* object, float deltaTime) = 0;
+	virtual Result update(Agent* agent, float deltaTime) = 0;
 
 protected:
 	Result m_result = INVALID;

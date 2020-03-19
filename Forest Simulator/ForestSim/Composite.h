@@ -3,15 +3,16 @@
 #include <vector>
 #include <memory>
 
-class GameObject;
+class Agent;
 
-//Abstract class for sequence and selector nodes
+//Base class for sequence and selector nodes
 class Composite : public IBehaviour
 {
 public:
-	Result update(GameObject* object, float deltaTime) override;
+	Result update(Agent* agent, float deltaTime) override;
 
 	void addBehaviour(std::shared_ptr<IBehaviour> behaviour);
+	void reset() { m_currentChild = m_children.begin(); }
 
 protected:
 	Result m_endOfArrayResult = INVALID;

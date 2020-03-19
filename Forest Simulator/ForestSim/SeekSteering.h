@@ -4,13 +4,10 @@
 class SeekSteering : public ISteering
 {
 public:
-	virtual void setSpeed(float speed) { m_speed = speed; }
+	Vector2 getForce(Agent* agent) const override;
 
-	Vector2 getForce(GameObject* object) const override;
-
-	void SetTarget(GameObject* object) { m_target = object; }
+	void setTarget(Agent* agent) { m_target = agent; }
 
 protected:
-	float m_speed = 50;
-	GameObject* m_target = nullptr;
+	Agent* m_target = nullptr;
 };

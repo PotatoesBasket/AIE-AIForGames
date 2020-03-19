@@ -1,22 +1,26 @@
 #pragma once
 #include "GameObject.h"
+#include "Graph.h"
 
 class Sprite;
 
-class Tile : public GameObject
+class Tile : public Node
 {
 public:
 	enum Type
 	{
-		grass,
+		ground,
 		water,
 		tree,
-		rock
+		grass
 	};
 	
-	Tile(Type type, Vector2 position) : m_type(type) { setPosition(position); }
+	Tile(Type type, Vector2 position) : m_type(type) { this->position = position; }
 	~Tile() {}
 
+	void addEdge(Node* target, float cost = 1) { outgoingEdges.push_back(Edge(target, cost)); }
+
+	Vector2 const getPosition() { return position; }
 	Type const getType() { return m_type; }
 
 private:

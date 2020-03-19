@@ -18,16 +18,19 @@ public:
 	GameObject() {}
 	virtual ~GameObject() {}
 
-	bool IsActive() const { return m_active; }
-	void SetActiveState(bool state) { m_active = state; }
+	bool isActive() const { return m_active; }
+	void setActiveState(bool state) { m_active = state; }
 
-	void update(float deltaTime);
-	void updateTransform();
-	virtual void onUpdate(float deltaTime) {};
-
+	virtual void update(float deltaTime);
 	void draw(std::shared_ptr<aie::Renderer2D> renderer);
+
+	virtual void onUpdate(float deltaTime) {};
 	virtual void onDraw(std::shared_ptr<aie::Renderer2D> renderer) {};
 
+private:
+	void updateTransform();
+
+public:
 	//////////////////////
 	// TRANSFORM MATRIX //
 	//////////////////////
@@ -75,15 +78,6 @@ public:
 	void addChild(const std::shared_ptr<GameObject>& child);
 	void removeChild(const std::shared_ptr<GameObject>& child);
 
-	//////////////////////////
-	// AI STUFF, MOVE LATER //
-	//////////////////////////
-
-	void addForce(Vector2 force) { m_velocity += force; }
-
-	Vector2 getVelocity() const { return m_velocity; }
-	float getMaxForce() const { return m_maxForce; }
-
 protected:
 	bool m_active = true;
 
@@ -94,9 +88,6 @@ protected:
 
 	GameObject* m_parent = nullptr;
 	std::vector<std::shared_ptr<GameObject>> m_children;
-
-	Vector2 m_velocity;
-	float m_maxForce;
 };
 
 class Component

@@ -1,7 +1,7 @@
 #include "SeekSteering.h"
-#include "GameObject.h"
+#include "Agent.h"
 
-Vector2 SeekSteering::getForce(GameObject* object) const
+Vector2 SeekSteering::getForce(Agent* agent) const
 {
 	Vector2 force = Vector2(0, 0);
 
@@ -9,9 +9,9 @@ Vector2 SeekSteering::getForce(GameObject* object) const
 		return force;
 
 	Vector2 velocity =
-		(m_target->getPosition() - object->getPosition()).normalised() * m_speed;
+		(m_target->getPosition() - agent->getPosition()).normalised() * agent->getMaxForce();
 
-	force = velocity - object->getVelocity();
+	force = velocity - agent->getVelocity();
 
 	return force;
 }

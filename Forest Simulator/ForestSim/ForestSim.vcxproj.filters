@@ -28,14 +28,23 @@
     <Filter Include="Behaviours\Decorators">
       <UniqueIdentifier>{62857c89-c0a4-4c58-8610-2f532bc0eafb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Behaviours\Steering">
-      <UniqueIdentifier>{eae89347-68c4-461e-8f00-df01d5622b0b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Behaviours\Steering\Forces">
-      <UniqueIdentifier>{4270aad6-a7ac-4ba5-ba91-df04600762cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pathfinding">
       <UniqueIdentifier>{21f04bb5-1e88-4657-9817-ef726e62dc5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Conditions">
+      <UniqueIdentifier>{70825f58-21f3-44c2-b0ca-0ae6515661e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Actions">
+      <UniqueIdentifier>{de9c9071-aebc-4816-8f4e-336f29eb3730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Actions\Pathfinding">
+      <UniqueIdentifier>{40e97dfd-5867-40fe-9ecf-29baa32ef1fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Actions\Steering">
+      <UniqueIdentifier>{eae89347-68c4-461e-8f00-df01d5622b0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Actions\Steering\Forces">
+      <UniqueIdentifier>{4270aad6-a7ac-4ba5-ba91-df04600762cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +60,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Animal.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="RNG.cpp">
       <Filter>Math</Filter>
     </ClCompile>
@@ -62,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectPool.cpp">
-      <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Components</Filter>
@@ -76,19 +79,61 @@
       <Filter>Behaviours\Decorators</Filter>
     </ClCompile>
     <ClCompile Include="SteeringBehaviour.cpp">
-      <Filter>Behaviours\Steering</Filter>
-    </ClCompile>
-    <ClCompile Include="FlowSteering.cpp">
-      <Filter>Behaviours\Steering\Forces</Filter>
+      <Filter>Behaviours\Actions\Steering</Filter>
     </ClCompile>
     <ClCompile Include="SeekSteering.cpp">
-      <Filter>Behaviours\Steering\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="FlowField.cpp">
-      <Filter>Pathfinding</Filter>
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
     </ClCompile>
     <ClCompile Include="Pathfinding.cpp">
       <Filter>Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Bunny.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderSteering.cpp">
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="AvoidSteering.cpp">
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="FleeSteering.cpp">
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowPathBehaviour.cpp">
+      <Filter>Behaviours\Actions\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="NewPathBehaviour.cpp">
+      <Filter>Behaviours\Actions\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Grass.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Life.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Fox.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="HungerCondition.cpp">
+      <Filter>Behaviours\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="DangerCondition.cpp">
+      <Filter>Behaviours\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="EnergyCondition.cpp">
+      <Filter>Behaviours\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="EatBehaviour.cpp">
+      <Filter>Behaviours\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepBehaviour.cpp">
+      <Filter>Behaviours\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,13 +152,7 @@
     <ClInclude Include="GameObject.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Animal.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Stat.h">
-      <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Clock.h">
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="RNG.h">
@@ -125,23 +164,14 @@
     <ClInclude Include="Map.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectPool.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
     <ClInclude Include="AnimatedSprite.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="AnimationSheets.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Spritesheets.h">
-      <Filter>Data</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="FilePaths.h">
-      <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="ScreenDefines.h">
       <Filter>Data</Filter>
@@ -164,23 +194,14 @@
     <ClInclude Include="InverseDecorator.h">
       <Filter>Behaviours\Decorators</Filter>
     </ClInclude>
-    <ClInclude Include="ISteering.h">
-      <Filter>Behaviours\Steering</Filter>
-    </ClInclude>
     <ClInclude Include="SteeringBehaviour.h">
-      <Filter>Behaviours\Steering</Filter>
+      <Filter>Behaviours\Actions\Steering</Filter>
     </ClInclude>
     <ClInclude Include="FleeSteering.h">
-      <Filter>Behaviours\Steering\Forces</Filter>
-    </ClInclude>
-    <ClInclude Include="FlowSteering.h">
-      <Filter>Behaviours\Steering\Forces</Filter>
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
     </ClInclude>
     <ClInclude Include="SeekSteering.h">
-      <Filter>Behaviours\Steering\Forces</Filter>
-    </ClInclude>
-    <ClInclude Include="FlowField.h">
-      <Filter>Pathfinding</Filter>
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
     </ClInclude>
     <ClInclude Include="Graph.h">
       <Filter>Pathfinding</Filter>
@@ -190,6 +211,54 @@
     </ClInclude>
     <ClInclude Include="ColourDefines.h">
       <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Bunny.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderSteering.h">
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="AvoidSteering.h">
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowPathBehaviour.h">
+      <Filter>Behaviours\Actions\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="NewPathBehaviour.h">
+      <Filter>Behaviours\Actions\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Grass.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteInfo.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="MapInfo.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Life.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Fox.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ISteering.h">
+      <Filter>Behaviours\Actions\Steering\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="EatBehaviour.h">
+      <Filter>Behaviours\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepBehaviour.h">
+      <Filter>Behaviours\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Conditions.h">
+      <Filter>Behaviours\Conditions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

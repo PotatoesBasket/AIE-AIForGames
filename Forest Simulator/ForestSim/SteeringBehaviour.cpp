@@ -1,10 +1,10 @@
 #include "SteeringBehaviour.h"
-#include "GameObject.h"
+#include "Agent.h"
 
-IBehaviour::Result SteeringBehaviour::update(GameObject* object, float deltaTime)
+IBehaviour::Result SteeringBehaviour::update(Agent* agent, float deltaTime)
 {
 	for (auto& force : m_steeringForces)
-		object->addForce(force->getForce(object));
+		agent->addForce(force->getForce(agent) * deltaTime);
 
-	return ONGOING;
+	return SUCCESS;
 }

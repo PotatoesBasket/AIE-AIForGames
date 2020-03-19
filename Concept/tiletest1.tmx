@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="-1" width="50" height="50" tilewidth="72" tileheight="72" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="50" height="50" tilewidth="72" tileheight="72" infinite="0" nextlayerid="2" nextobjectid="1">
+ <editorsettings>
+  <export target="../Forest Simulator/bin/tiletest1.csv" format="csv"/>
+ </editorsettings>
  <tileset firstgid="1" source="tile_72px.tsx"/>
  <layer id="1" name="Tile Layer 1" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztzzERACAMALFS/6Kx8XAZIiA7M0vOeZRHi0eLR4tHi0eLR4tHi0eLR4tHi0eLR4tHi0eLR4tHi0eLR4tHi0eLR4tHy68PGi5SnAtF
+   eAHtlUmOW0EMQ5107n/mmIsHEISkGn6nN/HC0ESRVNmdfL1er6/P5/MGn9/At/wGfr/fsfp0f2O/3nj//HnX+nivyju+p320qhvopYZ23DM3dBENj8n5pIYXv1N0HfY6394HS9SM3Dmf5OKsvIsz++jgQdH9ei6s18p9jxzOp1F86Ve182aNh/Q51exU0bVucjj9DnoTH5jJt8/Ai5NcURjFSWt35rzk0y6YjJVvYfCaeK8nvZ2Zc7letyu8Zr5X9ZzLsV2/0zvpuw6euv3EZl39PhPjNXd1ert95ySfdsFU0W9Q7hhxep35pLkzg493Ub3aYyfjdEdis15prubJp/p0hzfwO+BxfnizB5b5TXRO/Kx40PXdnbziZa+anfTgIeqW1T7YLvIeOU9en+fstHYu5Tv7uaO68i6uClv1dnQnTHJOWGa5c1MnF/VtlAd/yxUPeN/hDu2Sn8aV7mqeejt43VDdAVd1z6q30l3N0SZOeDC7sfLe7U66O7PknbS7WddPbtWJpVZ88nEteOihQZ0+qnlifHfK0b6NE/fpbHUXf1P8v+/8t/7Zcy5yzdCkp9j5BOOcHZYbFNmDm/2bCAecrqNbOj/Zd224iM4Dv8+U+/5Nnnzo5HuBQ5M6NavvEaxza48+nMl1UjuXctfKWdadDjj/HlbcHdduH03hlaPNu9IHR+z4cw6P+ryRcuftuE766O5EtCv+3AebfdXVrOI86aHj70avi/D73L0xJwrnc98jB3sb4SGu9MApdtjKS7Xn+9XOSU/8q++i0nNfnoOtPDgu8wp/2hPn6hbXxat6njuGGV58Rs93vXebu4bnuo2P9z2v/g3iTdwnO+mx6ydut4aPiH880ffIDUSfdfmunye41PYbPMd3xtyv6if+TnalLXx6oJfeve52k8vrE2+nWNfJ3H1nntip9u/31N8OftLWLL1TV3vu1efq+2fH1w3GNVyfHO+K9KYoDzl3jRuPuzvSSW3qalZ5BY+mauV+g3Lm/zLiBQ9en+R4zBt+6g70FfFQ+dc8+777yX/md/d55//znf8CFhkW3Q==
   </data>
  </layer>
 </map>

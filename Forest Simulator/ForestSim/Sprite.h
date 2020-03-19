@@ -1,17 +1,17 @@
 #pragma once
 #include "GameObject.h"
 #include "ResourceManager.h"
-#include "Spritesheets.h"
+#include "SpriteInfo.h"
 #include <Texture.h>
 
 class Sprite : public Component
 {
 public:
-	Sprite(Spritesheet sheet);
+	Sprite(SpriteInfo sheet) { loadSprite(sheet); }
 	~Sprite() {}
 
 	//load spritesheet and init values, also use to switch out sheets
-	void loadSprite(Spritesheet sheet);
+	void loadSprite(SpriteInfo sheet);
 
 private:
 	void draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> renderer) override;

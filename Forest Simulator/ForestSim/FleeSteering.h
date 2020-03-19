@@ -1,10 +1,13 @@
 #pragma once
 #include "SeekSteering.h"
 
-class FleeSteering : public SeekSteering
+class FleeSteering : public ISteering
 {
 public:
-	FleeSteering() { m_speed = -50; }
+	Vector2 getForce(Agent* agent) const override;
 
-	void setSpeed(float speed) override { m_speed = -speed; }
+	void setTarget(Agent* agent) { m_target = agent; }
+
+protected:
+	Agent* m_target = nullptr;
 };

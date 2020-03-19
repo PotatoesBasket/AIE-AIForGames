@@ -16,19 +16,6 @@ void GameObject::update(float deltaTime)
 	}
 }
 
-/*Updates the object's transform taking the parent's transform into account,
-then does the same for its children.*/
-void GameObject::updateTransform()
-{
-	if (m_parent)
-		m_globalTransform = m_parent->m_globalTransform * m_localTransform;
-	else
-		m_globalTransform = m_localTransform;
-
-	for (auto child : m_children)
-		child->updateTransform();
-}
-
 /*If object is alive, draw the object itself, then its components (if active), then its children.*/
 void GameObject::draw(std::shared_ptr<aie::Renderer2D> renderer)
 {
@@ -43,6 +30,19 @@ void GameObject::draw(std::shared_ptr<aie::Renderer2D> renderer)
 		for (auto child : m_children)
 			child->draw(renderer);
 	}
+}
+
+/*Updates the object's transform taking the parent's transform into account,
+then does the same for its children.*/
+void GameObject::updateTransform()
+{
+	if (m_parent)
+		m_globalTransform = m_parent->m_globalTransform * m_localTransform;
+	else
+		m_globalTransform = m_localTransform;
+
+	for (auto child : m_children)
+		child->updateTransform();
 }
 
 ///////////////////
