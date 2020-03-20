@@ -15,7 +15,7 @@
 
 Fox::Fox()
 {
-	m_life = std::make_shared<Life>(/*0.003f, 0.018f, 0.016f*/0, 0.018f, 0.016f);
+	m_life = std::make_shared<Life>(/*0.003f, 0.018f, 0.016f*/0, 0.005f, 0.002f);
 	addComponent(m_life);
 
 	initMovementValues();
@@ -33,6 +33,12 @@ void Fox::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 	renderer->setRenderColour(1, 0, 0, 1);
 	renderer->drawLine(getPosition().x, getPosition().y,
 		getPosition().x + m_velocity.x, getPosition().y + m_velocity.y, 2);
+	renderer->setRenderColour(1, 1, 1, 1);
+
+	renderer->setRenderColour(1, 1, 0, 1);
+	if (m_path.size() > 0)
+		for (auto& node : m_path)
+			renderer->drawCircle(node->position.x, node->position.y, 5);
 	renderer->setRenderColour(1, 1, 1, 1);
 #endif
 }
@@ -116,7 +122,7 @@ Node* Fox::getNearestFood()
 	if (closestPrey != nullptr)
 	{
 		m_targetAgent = closestPrey;
-		return getMap()->getNodeAtPosition(closestPrey->getPosition().x, closestPrey->getPosition().y);
+		return getMap()->getNodeAtPosition(closestPrey->getPosition());
 	}
 
 	return nullptr;

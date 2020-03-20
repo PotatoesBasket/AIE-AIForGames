@@ -16,7 +16,7 @@ public:
 	Result update(Agent* agent, float deltaTime) override;
 
 private:
-	const float criticalLevel = 0.5f;
+	const float criticalLevel = 0;// 0.5f;
 };
 
 class EnergyCondition : public IBehaviour

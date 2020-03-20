@@ -18,7 +18,7 @@ public:
 	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;
 
 	Vector2 getRandomTraversablePos();
-	Node* getNodeAtPosition(float xPos, float yPos);
+	Node* getNodeAtPosition(Vector2 position);
 
 	unsigned int getTileSize() const { return m_tileSize; }
 	unsigned int getMapWidthCells() const { return m_mapCols; }

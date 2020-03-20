@@ -16,11 +16,11 @@
 
 Bunny::Bunny()
 {
-	m_life = std::make_shared<Life>(/*0.009f, 0.02f, 0.014f*/0, 0, 0.08f);
+	m_life = std::make_shared<Life>(0.009f, 0.02f, 0.014f);
 	addComponent(m_life);
 
 	initMovementValues();
-	initBehaviours();
+	//initBehaviours();
 }
 
 void Bunny::onDraw(std::shared_ptr<aie::Renderer2D> renderer)

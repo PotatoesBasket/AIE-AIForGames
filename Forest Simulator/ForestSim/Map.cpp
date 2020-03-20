@@ -106,6 +106,14 @@ void Map::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 
 	for (auto& fox : m_foxes)
 		fox->draw(renderer);
+
+	renderer->setRenderColour(1, 1, 0, 1);
+	renderer->drawCircle(0, 0, 20);
+	renderer->setRenderColour(1, 0, 1, 1);
+	renderer->drawCircle(0, 72, 20);
+	renderer->setRenderColour(0, 1, 1, 1);
+	renderer->drawCircle(m_tiles[50]->position.x, m_tiles[50]->position.y, 20);
+	renderer->setRenderColour(1, 1, 1, 1);
 }
 
 Vector2 Map::getRandomTraversablePos()
@@ -122,18 +130,20 @@ Vector2 Map::getRandomTraversablePos()
 }
 
 // Gets ptr for the node located at given pixel coords
-Node* Map::getNodeAtPosition(float xPos, float yPos)
+Node* Map::getNodeAtPosition(Vector2 position)
 {
 	Node* node = nullptr;
 
-	int x = xPos / m_tileSize;
-	int y = yPos / m_tileSize;
+	int x = position.x / m_tileSize;
+	int y = position.y / m_tileSize - 50;
+
+	int index = -y * m_mapCols + x;
 
 	// return nullptr if invalid index
-	if (y * m_mapCols + x > m_tiles.size())
+	if (index > m_tiles.size())
 		return nullptr;
 
-	node = m_tiles[y * m_mapCols + x].get();
+	node = m_tiles[index].get();
 	return node;
 }
 

@@ -31,7 +31,7 @@ void Agent::update(float deltaTime)
 
 Node* Agent::getCurrentNode()
 {
-	return m_currentMap->getNodeAtPosition(getPosition().x, getPosition().y);
+	return m_currentMap->getNodeAtPosition(getPosition());
 }
 
 Node* Agent::getNearestWater()

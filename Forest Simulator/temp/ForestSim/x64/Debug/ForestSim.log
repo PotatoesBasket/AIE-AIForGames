@@ -1,2 +1,37 @@
-﻿  Life.cpp
+﻿  Bunny.cpp
+C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Graph.h(25): note: see declaration of 'Node'
+C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\NewPathBehaviour.h(5): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): note: see declaration of 'Node'
+  DangerCondition.cpp
+C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Graph.h(25): note: see declaration of 'Node'
+  EnergyCondition.cpp
+C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Graph.h(25): note: see declaration of 'Node'
+  Fox.cpp
+C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Graph.h(25): note: see declaration of 'Node'
+C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\NewPathBehaviour.h(5): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): note: see declaration of 'Node'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1547): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1602): note: see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<int,float,float>(int &&,float &&,float &&)' being compiled
+          with
+          [
+              _Ty=Life
+          ]
+  C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\memory(1602): note: see reference to function template instantiation 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<int,float,float>(int &&,float &&,float &&)' being compiled
+          with
+          [
+              _Ty=Life
+          ]
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Fox.cpp(18): note: see reference to function template instantiation 'std::shared_ptr<Life> std::make_shared<Life,int,float,float>(int &&,float &&,float &&)' being compiled
+  HungerCondition.cpp
+C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Graph.h(25): note: see declaration of 'Node'
+  Generating Code...
   ForestSim.vcxproj -> C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\temp\ForestSim\x64\Debug\ForestSim.exe

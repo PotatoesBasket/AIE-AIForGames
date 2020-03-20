@@ -12,5 +12,5 @@ public:
 	void setArriveRadius(float radius) { m_radius = radius; }
 
 private:
-	float m_radius = 25;
+	float m_radius = 50;
 };

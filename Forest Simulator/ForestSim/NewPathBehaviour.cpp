@@ -9,7 +9,7 @@ IBehaviour::Result NewPathBehaviour::update(Agent* agent, float deltaTime)
 	Node* end = agent->getNearestFood();
 
 	if (first == nullptr || end == nullptr)
-		return IBehaviour::FAILURE;
+		return IBehaviour::SUCCESS;
 
 	Pathfinding::HeuristicFunc heuristic = Pathfinding::diagonalShortcut;
 
