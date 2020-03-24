@@ -11,13 +11,13 @@ class SteeringBehaviour : public IBehaviour
 {
 public:
 	SteeringBehaviour() {}
-	SteeringBehaviour(std::shared_ptr<ISteering> steering) { m_steeringForces.push_back(steering); }
+	SteeringBehaviour(ISteering* steering) { m_steeringForces.push_back(steering); }
 	~SteeringBehaviour() {}
 
 	Result update(Agent* agent, float deltaTime) override;
 
-	void addSteeringForce(std::shared_ptr<ISteering> steering) { m_steeringForces.push_back(steering); }
+	void addSteeringForce(ISteering* steering) { m_steeringForces.push_back(steering); }
 
 protected:
-	std::vector<std::shared_ptr<ISteering>> m_steeringForces;
+	std::vector<ISteering*> m_steeringForces;
 };

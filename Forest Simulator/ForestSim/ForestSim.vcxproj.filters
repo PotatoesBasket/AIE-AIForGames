@@ -135,6 +135,15 @@
     <ClCompile Include="SleepBehaviour.cpp">
       <Filter>Behaviours\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="MateCondition.cpp">
+      <Filter>Behaviours\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnBehaviour.cpp">
+      <Filter>Behaviours\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentPool.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ForestSimApp.h">
@@ -166,9 +175,6 @@
     </ClInclude>
     <ClInclude Include="AnimatedSprite.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationSheets.h">
-      <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Objects</Filter>
@@ -259,6 +265,15 @@
     </ClInclude>
     <ClInclude Include="Conditions.h">
       <Filter>Behaviours\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnBehaviour.h">
+      <Filter>Behaviours\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationSheets.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="AgentPool.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

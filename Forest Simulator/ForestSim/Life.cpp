@@ -1,17 +1,18 @@
 #include "Life.h"
-
-Life::Life()
-{
-	m_age = std::make_unique<Stat>(0.1f);
-	m_hunger = std::make_unique<Stat>(0.1f);
-	m_energy = std::make_unique<Stat>(0.1f);
-}
+#include "RNG.h"
 
 Life::Life(float ageRate, float hungerRate, float energyRate)
 {
 	m_age = std::make_unique<Stat>(ageRate);
 	m_hunger = std::make_unique<Stat>(hungerRate);
 	m_energy = std::make_unique<Stat>(energyRate);
+
+	RNG& rng = RNG::getInstance();
+	rng.setFloatRange(0, 0.5f);
+
+	m_age->manualSet(rng.nextFloat());
+	m_hunger->manualSet(rng.nextFloat());
+	m_energy->manualSet(rng.nextFloat());
 }
 
 void Life::update(GameObject* parent, float deltaTime)
@@ -55,4 +56,11 @@ void Life::draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> renderer)
 		m_energy->getCurrentPercent() * 100, 4);
 
 	renderer->setRenderColour(1, 1, 1, 1);
+}
+
+void Life::reset()
+{
+	m_age->reset();
+	m_hunger->reset();
+	m_energy->reset();
 }

@@ -1,7 +1,9 @@
-﻿  Life.cpp
+﻿  FleeSteering.cpp
+C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Graph.h(25): note: see declaration of 'Node'
   Generating code
-  1 of 3585 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 3338 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    37 functions had inline decision re-evaluated but remain unchanged
+    32 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   ForestSim.vcxproj -> C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\temp\ForestSim\x64\Release\ForestSim.exe

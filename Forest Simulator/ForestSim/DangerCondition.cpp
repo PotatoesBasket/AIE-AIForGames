@@ -7,7 +7,6 @@ IBehaviour::Result DangerCondition::update(Agent* agent, float deltaTime)
 	Agent* closestPredator = nullptr;
 
 	// find closest predator
-	// bad, i know
 	for (auto& predator : agent->getMap()->getFoxes())
 	{
 		// skip if inactive
@@ -16,11 +15,11 @@ IBehaviour::Result DangerCondition::update(Agent* agent, float deltaTime)
 
 		// if no closest is set yet, set it and skip comparison
 		if (closestPredator == nullptr)
-			closestPredator = predator.get();
+			closestPredator = predator;
 		// otherwise, compare with current closest
 		else if (agent->getPosition().distanceSqr(predator->getPosition()) <
 			agent->getPosition().distanceSqr(closestPredator->getPosition()))
-			closestPredator = predator.get();
+			closestPredator = predator;
 	}
 
 	// check if predator is close enough to flee from

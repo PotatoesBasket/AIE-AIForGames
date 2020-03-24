@@ -10,8 +10,8 @@ bool ForestSimApp::startup()
 	RNG& rng = RNG::getInstance();
 	rng.setSeed((int)time);
 
-	m_2dRenderer = std::make_unique<aie::Renderer2D>();
-	m_map = std::make_unique<Map>();
+	m_2dRenderer = std::make_shared<aie::Renderer2D>();
+	m_map = new Map();
 	
 	initCamera();
 

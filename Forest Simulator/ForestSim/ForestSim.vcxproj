@@ -163,6 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="AgentPool.cpp" />
     <ClCompile Include="AvoidSteering.cpp" />
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Bunny.cpp" />
@@ -181,6 +182,7 @@
     <ClCompile Include="Life.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MateCondition.cpp" />
     <ClCompile Include="NewPathBehaviour.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="RNG.cpp" />
@@ -188,12 +190,15 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="SeekSteering.cpp" />
     <ClCompile Include="SleepBehaviour.cpp" />
+    <ClCompile Include="SpawnBehaviour.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SteeringBehaviour.cpp" />
     <ClCompile Include="WanderSteering.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AgentPool.h" />
+    <ClInclude Include="AnimationSheets.h" />
     <ClInclude Include="AvoidSteering.h" />
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Bunny.h" />
@@ -223,10 +228,10 @@
     <ClInclude Include="Sequence.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="SleepBehaviour.h" />
+    <ClInclude Include="SpawnBehaviour.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteInfo.h" />
     <ClInclude Include="Stat.h" />
-    <ClInclude Include="AnimationSheets.h" />
     <ClInclude Include="RNG.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />

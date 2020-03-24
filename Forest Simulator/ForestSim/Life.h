@@ -2,16 +2,17 @@
 #include "GameObject.h"
 #include "Stat.h"
 
-// class for holding all animal
+// class for holding all animal stats for simulating life
 class Life : public Component
 {
 public:
-	Life();
 	Life(float ageRate, float hungerRate, float energyRate);
 	virtual ~Life() {}
 
 	void update(GameObject* parent, float deltaTime) override;
 	void draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> renderer) override;
+
+	void reset();
 
 	Stat& getAge() { return *m_age.get(); }
 	Stat& getHunger() { return *m_hunger.get(); }

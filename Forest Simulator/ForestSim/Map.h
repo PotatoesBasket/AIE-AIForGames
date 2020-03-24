@@ -5,6 +5,7 @@
 #include "RNG.h"
 #include "Agent.h"
 #include "Grass.h"
+#include "AgentPool.h"
 
 class AABB;
 
@@ -12,7 +13,7 @@ class Map : public GameObject
 {
 public:
 	Map();
-	~Map() {}
+	~Map() { delete m_bunnies; delete m_foxes; }
 
 	void onUpdate(float deltaTime) override;
 	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;
@@ -28,9 +29,12 @@ public:
 
 	std::vector<std::unique_ptr<Tile>>& getTiles() { return m_tiles; }
 	std::vector<std::unique_ptr<AABB>>& getObstacles() { return m_obstacles; }
-	std::vector<std::unique_ptr<Agent>>& getBunnies() { return m_bunnies; }
-	std::vector<std::unique_ptr<Agent>>& getFoxes() { return m_foxes; }
 	std::vector<std::unique_ptr<Grass>>& getGrass() { return m_grassPatches; }
+	std::vector<Agent*>& getBunnies() { return m_bunnies->getAgentList(); }
+	std::vector<Agent*>& getFoxes() { return m_foxes->getAgentList(); }
+
+	AgentPool* getBunnyPool() { return m_bunnies; }
+	AgentPool* getFoxPool() { return m_foxes; }
 
 private:
 	void loadMapData();
@@ -55,7 +59,8 @@ private:
 
 	//object data
 	std::vector<std::unique_ptr<AABB>> m_obstacles;
-	std::vector<std::unique_ptr<Agent>> m_bunnies;
-	std::vector<std::unique_ptr<Agent>> m_foxes;
 	std::vector<std::unique_ptr<Grass>> m_grassPatches;
+
+	AgentPool* m_bunnies;
+	AgentPool* m_foxes;
 };

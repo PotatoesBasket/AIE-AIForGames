@@ -1,26 +1,6 @@
 #include "Fox.h"
 #include "Map.h"
 #include "Life.h"
-#include "Sequence.h"
-#include "Selector.h"
-#include "Conditions.h"
-#include "EatBehaviour.h"
-#include "SleepBehaviour.h"
-#include "NewPathBehaviour.h"
-#include "FollowPathBehaviour.h"
-#include "SteeringBehaviour.h"
-#include "AvoidSteering.h"
-#include "SeekSteering.h"
-#include "WanderSteering.h"
-
-Fox::Fox()
-{
-	m_life = std::make_shared<Life>(/*0.003f, 0.018f, 0.016f*/0, 0.005f, 0.002f);
-	addComponent(m_life);
-
-	initMovementValues();
-	initBehaviours();
-}
 
 void Fox::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 {
@@ -30,70 +10,101 @@ void Fox::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 
 #ifndef NDEBUG
 	// draw velocity vector
-	renderer->setRenderColour(1, 0, 0, 1);
+	renderer->setRenderColour(0, 0, 1, 1);
 	renderer->drawLine(getPosition().x, getPosition().y,
 		getPosition().x + m_velocity.x, getPosition().y + m_velocity.y, 2);
-	renderer->setRenderColour(1, 1, 1, 1);
 
+	//draw path of nodes
 	renderer->setRenderColour(1, 1, 0, 1);
 	if (m_path.size() > 0)
 		for (auto& node : m_path)
 			renderer->drawCircle(node->position.x, node->position.y, 5);
+
 	renderer->setRenderColour(1, 1, 1, 1);
 #endif
 }
 
+void Fox::init()
+{
+	m_life = std::make_shared<Life>(0.003f, 0.014f, 0.01f);
+	addComponent(m_life);
+
+	initMovementValues();
+	initBehaviours();
+}
+
 void Fox::initMovementValues()
 {
-	m_maxVelocity = 400;
+	m_maxVelocity = 600;
 	m_maxForce = 100;
 	m_visionRange = 9;
-	m_maxAvoidForce = 400;
+	m_maxAvoidForce = 600;
+	m_matureAge = 0.3f;
+	m_respawnDelay = 40;
+
+	RNG& rng = RNG::getInstance();
+	rng.setFloatRange(0, 40);
+	m_respawnTimer = rng.nextFloat();
 }
 
 void Fox::initBehaviours()
 {
 	// [selector] actions
-	bh_foxActSel = std::make_shared<Selector>();
-	addBehaviour(bh_foxActSel);
+	bh_foxActSel = std::make_unique<Selector>();
+	addBehaviour(bh_foxActSel.get());
 		// [sequence] hunger
-		bh_hungerSeq = std::make_shared<Sequence>();
-		bh_foxActSel->addBehaviour(bh_hungerSeq);
+		bh_hungerSeq = std::make_unique<Sequence>();
+		bh_foxActSel->addBehaviour(bh_hungerSeq.get());
 			// [condition] check hunger level
-			bh_hungerCond = std::make_shared<HungerCondition>();
-			bh_hungerSeq->addBehaviour(bh_hungerCond);
-			// [action] find nearest prey animal
-			bh_getPathToPrey = std::make_shared<NewPathBehaviour>(m_targetNode);
-			bh_hungerSeq->addBehaviour(bh_getPathToPrey);
-			// [action] chase prey
-			bh_followPathToPrey = std::make_shared<FollowPathBehaviour>();
-			bh_hungerSeq->addBehaviour(bh_followPathToPrey);
+			bh_hungerCond = std::make_unique<HungerCondition>();
+			bh_hungerSeq->addBehaviour(bh_hungerCond.get());
+			// [action] get path to nearest prey animal
+			bh_getPathToPrey = std::make_unique<NewPathBehaviour>(m_targetNode);
+			bh_hungerSeq->addBehaviour(bh_getPathToPrey.get());
+			// [action] follow path to prey
+			bh_followPathToPrey = std::make_unique<FollowPathBehaviour>();
+			bh_hungerSeq->addBehaviour(bh_followPathToPrey.get());
 			// [action] eat
-			bh_eatFood = std::make_shared<EatBehaviour>();
-			bh_hungerSeq->addBehaviour(bh_eatFood);
+			bh_eat = std::make_unique<EatBehaviour>();
+			bh_hungerSeq->addBehaviour(bh_eat.get());
 		// [sequence] energy
-		bh_energySeq = std::make_shared<Sequence>();
-		bh_foxActSel->addBehaviour(bh_energySeq);
+		bh_energySeq = std::make_unique<Sequence>();
+		bh_foxActSel->addBehaviour(bh_energySeq.get());
 			// [condition] check energy level
-			bh_energyCond = std::make_shared<EnergyCondition>();
-			bh_energySeq->addBehaviour(bh_energyCond);
+			bh_energyCond = std::make_unique<EnergyCondition>();
+			bh_energySeq->addBehaviour(bh_energyCond.get());
 			// [action] sleep
-			bh_sleep = std::make_shared<SleepBehaviour>();
-			bh_energySeq->addBehaviour(bh_sleep);
+			bh_sleep = std::make_unique<SleepBehaviour>();
+			bh_energySeq->addBehaviour(bh_sleep.get());
 		// [sequence] breeding
+		bh_mateSeq = std::make_unique<Sequence>();
+		bh_foxActSel->addBehaviour(bh_mateSeq.get());
 			// [condition] check if ready for breeding
+			bh_mateCond = std::make_unique<MateCondition>();
+			bh_mateSeq->addBehaviour(bh_mateCond.get());
 			// [action] get path to nearest viable partner
-			// [action] travel to partner
+			bh_getPathToMate = std::make_unique<NewPathBehaviour>(m_targetNode);
+			bh_mateSeq->addBehaviour(bh_getPathToMate.get());
+			// [action] follow path to partner
+			bh_followPathToMate = std::make_unique<FollowPathBehaviour>();
+			bh_mateSeq->addBehaviour(bh_followPathToMate.get());
 			// [action] spawn young
+			bh_spawn = std::make_unique<SpawnBehaviour>();
+			bh_mateSeq->addBehaviour(bh_spawn.get());
 		// [action] wander
-		bh_defaultSteer = std::make_shared<SteeringBehaviour>();
-		bh_foxActSel->addBehaviour(bh_defaultSteer);
+		bh_wander = std::make_unique<SteeringBehaviour>();
+		bh_foxActSel->addBehaviour(bh_wander.get());
 			// [steer] avoid obstacles
-			st_avoid = std::make_shared<AvoidSteering>();
-			bh_defaultSteer->addSteeringForce(st_avoid);
+			st_avoid = std::make_unique<AvoidSteering>();
+			bh_wander->addSteeringForce(st_avoid.get());
 			// [steer] wander
-			st_wander = std::make_shared<WanderSteering>();
-			bh_defaultSteer->addSteeringForce(st_wander);
+			st_wander = std::make_unique<WanderSteering>();
+			bh_wander->addSteeringForce(st_wander.get());
+}
+
+void Fox::spawnNew()
+{
+	m_currentMap->getFoxPool()->activateNext(getPosition());
 }
 
 Node* Fox::getNearestFood()
@@ -111,11 +122,10 @@ Node* Fox::getNearestFood()
 
 		// if no closest is set yet, set it and skip comparison
 		if (closestPrey == nullptr)
-			closestPrey = prey.get();
+			closestPrey = prey;
 		// otherwise, compare with current closest
-		else if (getPosition().distanceSqr(prey->getPosition()) <
-			getPosition().distanceSqr(prey->getPosition()))
-			closestPrey = prey.get();
+		else if (getPosition().distanceSqr(prey->getPosition()) < getPosition().distanceSqr(closestPrey->getPosition()))
+			closestPrey = prey;
 	}
 
 	// check prey was found, return node prey is on
@@ -125,12 +135,46 @@ Node* Fox::getNearestFood()
 		return getMap()->getNodeAtPosition(closestPrey->getPosition());
 	}
 
+	m_targetAgent = nullptr;
 	return nullptr;
 }
 
 Node* Fox::getNearestMate()
 {
-	Node* mate = nullptr;
+	if (getMap()->getFoxes().begin() == getMap()->getFoxes().end())
+		return nullptr;
 
-	return mate;
+	Agent* closestMate = nullptr;
+
+	for (auto& fox : getMap()->getFoxes())
+	{
+		// skip if inactive
+		if (!fox->isActive())
+			continue;
+
+		// skip if fox is this fox
+		if (fox == this)
+			continue;
+
+		// skip if partner ineligible
+		if (!fox->canSpawn())
+			continue;
+
+		// if no closest is set yet, set it and skip comparison
+		if (closestMate == nullptr)
+			closestMate = fox;
+		// otherwise, compare with current closest
+		else if (getPosition().distanceSqr(fox->getPosition()) < getPosition().distanceSqr(closestMate->getPosition()))
+			closestMate = fox;
+	}
+
+	// check mate was found, return node mate is on
+	if (closestMate != nullptr)
+	{
+		m_targetAgent = closestMate;
+		return getMap()->getNodeAtPosition(closestMate->getPosition());
+	}
+
+	m_targetAgent = nullptr;
+	return nullptr;
 }

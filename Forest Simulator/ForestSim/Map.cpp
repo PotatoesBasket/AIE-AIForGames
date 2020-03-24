@@ -20,25 +20,32 @@ Map::Map()
 	loadMapData();
 	setMapConnections();
 
-	//create bunnies
-	for (int i = 0; i < 2; ++i)
-		m_bunnies.push_back(std::make_unique<Bunny>());
-
-	//create foxes
-	for (int i = 0; i < 2; ++i)
-		m_foxes.push_back(std::make_unique<Fox>());
-
-	//place animals on map and set their map pointers
-	for (auto& bunny : m_bunnies)
+	// create bunnies for pool
+	std::vector<Agent*> bunnies;
+	for (int i = 0; i < 50; ++i)
 	{
-		bunny->setPosition(getRandomTraversablePos());
-		bunny->setMap(this);
+		bunnies.push_back(new Bunny());
+		bunnies[i]->setMap(this);
+		bunnies[i]->setActiveState(false);
 	}
-	for (auto& fox : m_foxes)
+	m_bunnies = new AgentPool(bunnies);
+
+	// create foxes for pool
+	std::vector<Agent*> foxes;
+	for (int i = 0; i < 50; ++i)
 	{
-		fox->setPosition(getRandomTraversablePos());
-		fox->setMap(this);
+		foxes.push_back(new Fox());
+		foxes[i]->setMap(this);
+		foxes[i]->setActiveState(false);
 	}
+	m_foxes = new AgentPool(foxes);
+
+	// set active beginning number of agents
+	for (int i = 0; i < 20; ++i)
+		m_bunnies->activateNext(getRandomTraversablePos(), 1);
+
+	for (int i = 0; i < 10; ++i)
+		m_foxes->activateNext(getRandomTraversablePos(), 1);
 }
 
 void Map::onUpdate(float deltaTime)
@@ -46,11 +53,8 @@ void Map::onUpdate(float deltaTime)
 	for (auto& grass : m_grassPatches)
 		grass->update(deltaTime);
 
-	for (auto& bunny : m_bunnies)
-		bunny->update(deltaTime);
-
-	for (auto& fox : m_foxes)
-		fox->update(deltaTime);
+	m_bunnies->update(deltaTime);
+	m_foxes->update(deltaTime);
 }
 
 void Map::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
@@ -101,19 +105,8 @@ void Map::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 	for (auto& grass : m_grassPatches)
 		grass->draw(renderer);
 
-	for (auto& bunny : m_bunnies)
-		bunny->draw(renderer);
-
-	for (auto& fox : m_foxes)
-		fox->draw(renderer);
-
-	renderer->setRenderColour(1, 1, 0, 1);
-	renderer->drawCircle(0, 0, 20);
-	renderer->setRenderColour(1, 0, 1, 1);
-	renderer->drawCircle(0, 72, 20);
-	renderer->setRenderColour(0, 1, 1, 1);
-	renderer->drawCircle(m_tiles[50]->position.x, m_tiles[50]->position.y, 20);
-	renderer->setRenderColour(1, 1, 1, 1);
+	m_bunnies->draw(renderer);
+	m_foxes->draw(renderer);
 }
 
 Vector2 Map::getRandomTraversablePos()
@@ -134,8 +127,8 @@ Node* Map::getNodeAtPosition(Vector2 position)
 {
 	Node* node = nullptr;
 
-	int x = position.x / m_tileSize;
-	int y = position.y / m_tileSize - 50;
+	int x = (position.x + m_tileSize * 0.5f) / m_tileSize;
+	int y = (position.y - m_tileSize * 0.5f) / m_tileSize - 50;
 
 	int index = -y * m_mapCols + x;
 

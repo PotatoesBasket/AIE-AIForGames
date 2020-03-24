@@ -25,6 +25,7 @@ public:
 
 	void reset() { m_timer = 0.0f; m_current = 0.0f; }
 	void manualAdjust(float amount) { m_current += amount; }
+	void manualSet(float value) { m_current = value; }
 
 	float getCurrentPercent() { return m_current; }
 

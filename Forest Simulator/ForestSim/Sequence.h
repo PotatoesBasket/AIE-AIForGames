@@ -5,6 +5,6 @@
 class Sequence : public Composite
 {
 public:
-	Sequence() { m_endOfArrayResult = SUCCESS; }
+	Sequence() { m_continueResult = SUCCESS; }
 	~Sequence() {}
 };

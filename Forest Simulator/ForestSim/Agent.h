@@ -2,12 +2,13 @@
 #include "GameObject.h"
 #include "Graph.h"
 #include "AABB.h"
+#include "IBehaviour.h"
 #include "Life.h"
 #include <list>
 
 class Map;
-class IBehaviour;
 class Node;
+class Grass;
 
 // virtual class for game objects with pathfinding and behaviours
 class Agent : public GameObject
@@ -30,25 +31,28 @@ public:
 	Node* getCurrentNode();
 
 	//behaviours
-	void addBehaviour(std::shared_ptr<IBehaviour> behaviour) { m_behaviourList.push_back(behaviour); }
+	void addBehaviour(IBehaviour* behaviour) { m_behaviourList.push_back(behaviour); }
 	
-	bool getEatState() { return isEating; }
-	void setEatState(bool state) { isEating = state; }
 	bool getSleepState() { return isSleeping; }
 	void setSleepState(bool state) { isSleeping = state; }
+	float getRespawnTimer() { return m_respawnTimer; }
+	bool canSpawn() { return m_respawnTimer > m_respawnDelay && getStats()->getAge().getCurrentPercent() > m_matureAge; }
+	void resetRespawnTimer() { m_respawnTimer = 0; }
+
+	virtual void spawnNew() = 0;
 
 	//pathing
 	Node* getTargetNode() { return m_targetNode; }
 	Agent* getTargetAgent() { return m_targetAgent; }
+	Grass* getTargetGrass() { return m_targetGrass; }
 	void setTargetNode(Node* node) { m_targetNode = node; }
 	void setTargetAgent(Agent* agent) { m_targetAgent = agent; }
+	void setTargetGrass(Grass* grass) { m_targetGrass = grass; }
 
-	Node* getNearestWater();
 	virtual Node* getNearestFood() = 0;
 	virtual Node* getNearestMate() = 0;
 
 	std::list<Node*>& getPath() { return m_path; }
-	void setPath(const std::list<Node*> path) { m_path = path; }
 
 	void addForce(Vector2 force) { m_velocity += force; }
 
@@ -59,7 +63,7 @@ public:
 	float getMaxVelocity() const { return m_maxVelocity; }
 	float getVisionRange() const { return m_visionRange; }
 	float getMaxAvoidForce() const { return m_maxAvoidForce; }
-	float getFleeRange() const { return m_fleeRange; }
+	float getMatureAge() const { return m_matureAge; }
 
 private:
 	void updateBehaviours();
@@ -70,18 +74,17 @@ protected:
 
 	//behaviours
 	std::shared_ptr<Life> m_life;
-	bool isDrinking = false;
-	bool isEating = false;
 	bool isSleeping = false;
 
 	float m_bhTimer = 0;
 	float m_bhDelay = 0.1f; //amount of time before behaviours are updated again
 
-	std::vector<std::shared_ptr<IBehaviour>> m_behaviourList;
+	std::vector<IBehaviour*> m_behaviourList;
 
 	//pathing
 	Node* m_targetNode = nullptr;
 	Agent* m_targetAgent = nullptr;
+	Grass* m_targetGrass = nullptr;
 
 	std::list<Node*> m_path;
 
@@ -91,5 +94,7 @@ protected:
 	float m_maxForce = 0;
 	float m_visionRange = 0;
 	float m_maxAvoidForce = 0;
-	float m_fleeRange = 0;
+	float m_matureAge = 0;
+	float m_respawnDelay = 0;
+	float m_respawnTimer = 0;
 };

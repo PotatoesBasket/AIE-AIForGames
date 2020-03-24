@@ -9,6 +9,7 @@ void Agent::update(float deltaTime)
 		onUpdate(deltaTime);
 
 		m_bhTimer += deltaTime;
+		m_respawnTimer += deltaTime;
 		updateBehaviours();
 
 		//clamp velocity
@@ -32,13 +33,6 @@ void Agent::update(float deltaTime)
 Node* Agent::getCurrentNode()
 {
 	return m_currentMap->getNodeAtPosition(getPosition());
-}
-
-Node* Agent::getNearestWater()
-{
-	Node* closestWater = nullptr;
-
-	return closestWater;
 }
 
 void Agent::updateBehaviours()

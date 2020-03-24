@@ -1,62 +1,62 @@
 #pragma once
 #include "Agent.h"
-
-class Sequence;
-class Selector;
-class DangerCondition;
-class ThirstCondition;
-class DrinkBehaviour;
-class HungerCondition;
-class EatBehaviour;
-class EnergyCondition;
-class SleepBehaviour;
-class NewPathBehaviour;
-class FollowPathBehaviour;
-class SteeringBehaviour;
-class AvoidSteering;
-class FleeSteering;
-class WanderSteering;
+#include "Sequence.h"
+#include "Selector.h"
+#include "Conditions.h"
+#include "EatBehaviour.h"
+#include "SleepBehaviour.h"
+#include "SpawnBehaviour.h"
+#include "NewPathBehaviour.h"
+#include "FollowPathBehaviour.h"
+#include "SteeringBehaviour.h"
+#include "AvoidSteering.h"
+#include "FleeSteering.h"
+#include "WanderSteering.h"
 
 class Bunny : public Agent
 {
 public:
-	Bunny();
+	Bunny() { init(); }
+	Bunny(Vector2 position) { init(); setPosition(position); }
 	virtual ~Bunny() {}
 
 	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;
 
+	void init();
 	void initMovementValues();
 	void initBehaviours();
+
+	void spawnNew() override;
 
 	Node* getNearestFood() override;
 	Node* getNearestMate() override;
 
 private:
-	std::shared_ptr<Selector> bh_bunnyActSel;
+	std::unique_ptr<Selector>				bh_bunnyActSel;
 
-	std::shared_ptr<Sequence> bh_fleeSeq;
-	std::shared_ptr<DangerCondition> bh_dangerCond;
-	std::shared_ptr<SteeringBehaviour> bh_fleeSteer;
-
-	std::shared_ptr<Sequence> bh_thirstSeq;
-	std::shared_ptr<ThirstCondition> bh_thirstCond;
-	std::shared_ptr<NewPathBehaviour> bh_getPathToWater;
-	std::shared_ptr<FollowPathBehaviour> bh_followPathToWater;
-	std::shared_ptr<DrinkBehaviour> bh_drinkWater;
-
-	std::shared_ptr<Sequence> bh_hungerSeq;
-	std::shared_ptr<HungerCondition> bh_hungerCond;
-	std::shared_ptr<NewPathBehaviour> bh_getPathToGrass;
-	std::shared_ptr<FollowPathBehaviour> bh_followPathToGrass;
-	std::shared_ptr<EatBehaviour> bh_eatGrass;
-
-	std::shared_ptr<Sequence> bh_energySeq;
-	std::shared_ptr<EnergyCondition> bh_energyCond;
-	std::shared_ptr<SleepBehaviour> bh_sleep;
-
-	std::shared_ptr<SteeringBehaviour> bh_defaultSteer;
-
-	std::shared_ptr<AvoidSteering> st_avoid;
-	std::shared_ptr<FleeSteering> st_flee;
-	std::shared_ptr<WanderSteering> st_wander;
+	std::unique_ptr<Sequence>				bh_fleeSeq;
+	std::unique_ptr<DangerCondition>		bh_dangerCond;
+	std::unique_ptr<SteeringBehaviour>		bh_flee;
+	std::unique_ptr<AvoidSteering>			st_avoidFlee;
+	std::unique_ptr<FleeSteering>			st_flee;
+		 
+	std::unique_ptr<Sequence>				bh_hungerSeq;
+	std::unique_ptr<HungerCondition>		bh_hungerCond;
+	std::unique_ptr<NewPathBehaviour>		bh_getPathToGrass;
+	std::unique_ptr<FollowPathBehaviour>	bh_followPathToGrass;
+	std::unique_ptr<EatBehaviour>			bh_eat;
+		 
+	std::unique_ptr<Sequence>				bh_energySeq;
+	std::unique_ptr<EnergyCondition>		bh_energyCond;
+	std::unique_ptr<SleepBehaviour>			bh_sleep;
+		 
+	std::unique_ptr<Sequence>				bh_mateSeq;
+	std::unique_ptr<MateCondition>			bh_mateCond;
+	std::unique_ptr<NewPathBehaviour>		bh_getPathToMate;
+	std::unique_ptr<FollowPathBehaviour>	bh_followPathToMate;
+	std::unique_ptr<SpawnBehaviour>			bh_spawn;
+		 
+	std::unique_ptr<SteeringBehaviour>		bh_wander;
+	std::unique_ptr<AvoidSteering>			st_avoidWander;
+	std::unique_ptr<WanderSteering>			st_wander;
 };

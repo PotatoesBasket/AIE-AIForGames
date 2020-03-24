@@ -2,26 +2,6 @@
 #include "Map.h"
 #include "Life.h"
 #include "Grass.h"
-#include "Sequence.h"
-#include "Selector.h"
-#include "Conditions.h"
-#include "EatBehaviour.h"
-#include "SleepBehaviour.h"
-#include "NewPathBehaviour.h"
-#include "FollowPathBehaviour.h"
-#include "SteeringBehaviour.h"
-#include "AvoidSteering.h"
-#include "FleeSteering.h"
-#include "WanderSteering.h"
-
-Bunny::Bunny()
-{
-	m_life = std::make_shared<Life>(0.009f, 0.02f, 0.014f);
-	addComponent(m_life);
-
-	initMovementValues();
-	//initBehaviours();
-}
 
 void Bunny::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 {
@@ -34,89 +14,183 @@ void Bunny::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 	renderer->setRenderColour(1, 0, 0, 1);
 	renderer->drawLine(getPosition().x, getPosition().y,
 		getPosition().x + m_velocity.x, getPosition().y + m_velocity.y, 2);
+
+	//draw path of nodes
+	renderer->setRenderColour(1, 0, 1, 1);
+	if (m_path.size() > 0)
+		for (auto& node : m_path)
+			renderer->drawCircle(node->position.x, node->position.y, 5);
+
 	renderer->setRenderColour(1, 1, 1, 1);
 #endif
 }
 
+void Bunny::init()
+{
+	m_life = std::make_shared<Life>(0.008f, 0.028f, 0.02f);
+	addComponent(m_life);
+
+	initMovementValues();
+	initBehaviours();
+}
+
 void Bunny::initMovementValues()
 {
-	m_maxVelocity = 800;
-	m_maxForce = 300;
+	m_maxVelocity = 400;
+	m_maxForce = 100;
 	m_visionRange = 8;
-	m_maxAvoidForce = 600;
-	m_fleeRange = 100;
+	m_maxAvoidForce = 500;
+	m_matureAge = 0.05f;
+	m_respawnDelay = 20;
+
+	RNG& rng = RNG::getInstance();
+	rng.setFloatRange(0, 20);
+	m_respawnTimer = rng.nextFloat();
 }
 
 void Bunny::initBehaviours()
 {
-	st_avoid = std::make_shared<AvoidSteering>();
-	st_flee = std::make_shared<FleeSteering>();
-	st_wander = std::make_shared<WanderSteering>();
-
-	st_flee->setTarget(m_targetAgent);
-
 	// [selector] actions
-	bh_bunnyActSel = std::make_shared<Selector>();
-	addBehaviour(bh_bunnyActSel);
+	bh_bunnyActSel = std::make_unique<Selector>();
+	addBehaviour(bh_bunnyActSel.get());
 		// [sequence] flee
-		bh_fleeSeq = std::make_shared<Sequence>();
-		bh_bunnyActSel->addBehaviour(bh_fleeSeq);
+		bh_fleeSeq = std::make_unique<Sequence>();
+		bh_bunnyActSel->addBehaviour(bh_fleeSeq.get());
 			// [condition] check if predator nearby
-			bh_dangerCond = std::make_shared<DangerCondition>();
-			bh_fleeSeq->addBehaviour(bh_dangerCond);
+			bh_dangerCond = std::make_unique<DangerCondition>();
+			bh_fleeSeq->addBehaviour(bh_dangerCond.get());
 			// [action] flee
-			bh_fleeSteer = std::make_shared<SteeringBehaviour>();
+			bh_flee = std::make_unique<SteeringBehaviour>();
+			bh_fleeSeq->addBehaviour(bh_flee.get());
 				// [steer] avoid obstacles
-				bh_fleeSteer->addSteeringForce(st_avoid);
+				st_avoidFlee = std::make_unique<AvoidSteering>();
+				bh_flee->addSteeringForce(st_avoidFlee.get());
 				// [steer] flee from predator
-				bh_fleeSteer->addSteeringForce(st_flee);
+				st_flee = std::make_unique<FleeSteering>();
+				bh_flee->addSteeringForce(st_flee.get());
 		// [sequence] hunger
-		bh_hungerSeq = std::make_shared<Sequence>();
-		bh_bunnyActSel->addBehaviour(bh_hungerSeq);
+		bh_hungerSeq = std::make_unique<Sequence>();
+		bh_bunnyActSel->addBehaviour(bh_hungerSeq.get());
 			// [condition] check hunger level
-			bh_hungerCond = std::make_shared<HungerCondition>();
-			bh_hungerSeq->addBehaviour(bh_hungerCond);
+			bh_hungerCond = std::make_unique<HungerCondition>();
+			bh_hungerSeq->addBehaviour(bh_hungerCond.get());
 			// [action] find nearest food source
-			bh_getPathToGrass = std::make_shared<NewPathBehaviour>(getNearestFood());
-			bh_hungerSeq->addBehaviour(bh_getPathToGrass);
+			bh_getPathToGrass = std::make_unique<NewPathBehaviour>(m_targetNode);
+			bh_hungerSeq->addBehaviour(bh_getPathToGrass.get());
 			// [action] travel to food source
-			bh_followPathToGrass = std::make_shared<FollowPathBehaviour>();
-			bh_hungerSeq->addBehaviour(bh_followPathToGrass);
+			bh_followPathToGrass = std::make_unique<FollowPathBehaviour>();
+			bh_hungerSeq->addBehaviour(bh_followPathToGrass.get());
 			// [action] eat
-			bh_eatGrass = std::make_shared<EatBehaviour>();
-			bh_hungerSeq->addBehaviour(bh_eatGrass);
+			bh_eat = std::make_unique<EatBehaviour>();
+			bh_hungerSeq->addBehaviour(bh_eat.get());
 		// [sequence] energy
-		bh_energySeq = std::make_shared<Sequence>();
-		bh_bunnyActSel->addBehaviour(bh_energySeq);
+		bh_energySeq = std::make_unique<Sequence>();
+		bh_bunnyActSel->addBehaviour(bh_energySeq.get());
 			// [condition] check energy level
-			bh_energyCond = std::make_shared<EnergyCondition>();
-			bh_energySeq->addBehaviour(bh_energyCond);
+			bh_energyCond = std::make_unique<EnergyCondition>();
+			bh_energySeq->addBehaviour(bh_energyCond.get());
 			// [action] sleep
-			bh_sleep = std::make_shared<SleepBehaviour>();
-			bh_energySeq->addBehaviour(bh_sleep);
+			bh_sleep = std::make_unique<SleepBehaviour>();
+			bh_energySeq->addBehaviour(bh_sleep.get());
 		// [sequence] breeding
+		bh_mateSeq = std::make_unique<Sequence>();
+		bh_bunnyActSel->addBehaviour(bh_mateSeq.get());
 			// [condition] check for nearest viable partner
-			// [action] travel to partner
+			bh_mateCond = std::make_unique<MateCondition>();
+			bh_mateSeq->addBehaviour(bh_mateCond.get());
+			// [action] get path to partner
+			bh_getPathToMate = std::make_unique<NewPathBehaviour>(m_targetNode);
+			bh_mateSeq->addBehaviour(bh_getPathToMate.get());
+			// [action] follow path to partner
+			bh_followPathToMate = std::make_unique<FollowPathBehaviour>();
+			bh_mateSeq->addBehaviour(bh_followPathToMate.get());
 			// [action] spawn young
+			bh_spawn = std::make_unique<SpawnBehaviour>();
+			bh_mateSeq->addBehaviour(bh_spawn.get());
 		// [action] wander
-		bh_defaultSteer = std::make_shared<SteeringBehaviour>();
-		bh_bunnyActSel->addBehaviour(bh_defaultSteer);
+		bh_wander = std::make_unique<SteeringBehaviour>();
+		bh_bunnyActSel->addBehaviour(bh_wander.get());
 			// [steer] avoid obstacles
-			bh_defaultSteer->addSteeringForce(st_avoid);
+			st_avoidWander = std::make_unique<AvoidSteering>();
+			bh_wander->addSteeringForce(st_avoidFlee.get());
 			// [steer] wander randomly
-			bh_defaultSteer->addSteeringForce(st_wander);
+			st_wander = std::make_unique<WanderSteering>();
+			bh_wander->addSteeringForce(st_wander.get());
+}
+
+void Bunny::spawnNew()
+{
+	m_currentMap->getBunnyPool()->activateNext(getPosition());
 }
 
 Node* Bunny::getNearestFood()
 {
-	Node* food = nullptr;
+	if (getMap()->getGrass().begin() == getMap()->getGrass().end())
+		return nullptr;
 
-	return food;
+	Grass* closestGrass = nullptr;
+
+	for (auto& grass : getMap()->getGrass())
+	{
+		// skip if inactive
+		if (!grass->isEdible())
+			continue;
+
+		// if no closest is set yet, set it and skip comparison
+		if (closestGrass == nullptr)
+			closestGrass = grass.get();
+		// otherwise, compare with current closest
+		else if (getPosition().distanceSqr(grass->getPosition()) < getPosition().distanceSqr(closestGrass->getPosition()))
+			closestGrass = grass.get();
+	}
+
+	// check grass was found, return node grass is on
+	if (closestGrass != nullptr)
+	{
+		m_targetGrass = closestGrass;
+		return getMap()->getNodeAtPosition(closestGrass->getPosition());
+	}
+
+	m_targetGrass = nullptr;
+	return nullptr;
 }
 
 Node* Bunny::getNearestMate()
 {
-	Node* mate = nullptr;
+	if (getMap()->getBunnies().begin() == getMap()->getBunnies().end())
+		return nullptr;
 
-	return mate;
+	Agent* closestMate = nullptr;
+
+	for (auto& bunny : getMap()->getBunnies())
+	{
+		// skip if inactive
+		if (!bunny->isActive())
+			continue;
+
+		// skip if bunny is this bunny
+		if (bunny == this)
+			continue;
+
+		// skip if partner ineligible
+		if (!bunny->canSpawn())
+			continue;
+
+		// if no closest is set yet, set it and skip comparison
+		if (closestMate == nullptr)
+			closestMate = bunny;
+		// otherwise, compare with current closest
+		else if (getPosition().distanceSqr(bunny->getPosition()) < getPosition().distanceSqr(closestMate->getPosition()))
+			closestMate = bunny;
+	}
+
+	// check mate was found, return node mate is on
+	if (closestMate != nullptr)
+	{
+		m_targetAgent = closestMate;
+		return getMap()->getNodeAtPosition(closestMate->getPosition());
+	}
+
+	m_targetAgent = nullptr;
+	return nullptr;
 }

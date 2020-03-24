@@ -9,7 +9,7 @@ class ForestSimApp : public aie::Application
 {
 public:
 	ForestSimApp() {}
-	virtual ~ForestSimApp() {}
+	virtual ~ForestSimApp() { delete m_map; }
 
 	virtual bool startup();
 	virtual void shutdown() {}
@@ -23,7 +23,7 @@ private:
 
 protected:
 	std::shared_ptr<aie::Renderer2D> m_2dRenderer = nullptr;
-	std::unique_ptr<Map> m_map = nullptr;
+	Map* m_map = nullptr;
 
 	Vector2 m_camPos;
 	float m_currentPanSpeed = 0;
