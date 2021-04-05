@@ -25,7 +25,7 @@ IBehaviour::Result EatBehaviour::update(Agent* agent, float deltaTime)
 	}
 
 	// keep agent still and reduce hunger to 0
-	agent->setVelocity(Vector2(0, 0));
+	agent->setVelocity(glm::vec2(0, 0));
 	agent->getStats()->getHunger().reset();
 
 	return Result::SUCCESS;

@@ -17,7 +17,7 @@ class Bunny : public Agent
 {
 public:
 	Bunny() { init(); }
-	Bunny(Vector2 position) { init(); setPosition(position); }
+	Bunny(glm::vec2 position) { init(); setPosition(position); }
 	virtual ~Bunny() {}
 
 	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;

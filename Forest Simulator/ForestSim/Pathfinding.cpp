@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <unordered_set>
 #include <algorithm>
+#include <glm/gtx/norm.hpp>
 
 std::list<Node*> Pathfinding::getPathAStar(Node* startNode, Node* endNode, float heuristic)
 {
@@ -109,7 +110,7 @@ bool Pathfinding::findPathAStar(Node* firstNode, Node* secondNode, std::list<Nod
 //good for arbitrarily-placed nodes
 float Pathfinding::distanceSqr(Node* firstNode, Node* secondNode)
 {
-	return firstNode->position.distanceSqr(secondNode->position);
+	return glm::length2(secondNode->position - firstNode->position);
 }
 
 //good for 4-way grids

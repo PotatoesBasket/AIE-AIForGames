@@ -10,7 +10,7 @@ AgentPool::~AgentPool()
 
 /*Looks for the first inactive agent in agent list and activates it.*/
 // state determines whether stats are reset or not
-bool AgentPool::activateNext(Vector2 position, int state)
+bool AgentPool::activateNext(glm::vec2 position, int state)
 {
 	std::vector<Agent*>::iterator it = m_agentList.begin();
 

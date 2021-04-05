@@ -4,5 +4,5 @@
 class FleeSteering : public ISteering
 {
 public:
-	Vector2 getForce(Agent* agent) const override;
+	glm::vec2 getForce(Agent* agent) const override;
 };

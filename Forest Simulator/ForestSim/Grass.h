@@ -6,7 +6,7 @@ class Sprite;
 class Grass : public GameObject
 {
 public:
-	Grass(Vector2 position);
+	Grass(glm::vec2 position);
 	~Grass() {}
 
 	void onUpdate(float deltaTime) override;

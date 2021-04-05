@@ -25,7 +25,7 @@ protected:
 	std::shared_ptr<aie::Renderer2D> m_2dRenderer = nullptr;
 	Map* m_map = nullptr;
 
-	Vector2 m_camPos;
+	glm::vec2 m_camPos;
 	float m_currentPanSpeed = 0;
 	const float m_panSpeed = 400;
 	const float m_fastPanSpeed = 1000;

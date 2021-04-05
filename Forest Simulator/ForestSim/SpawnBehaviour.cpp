@@ -10,7 +10,7 @@ IBehaviour::Result SpawnBehaviour::update(Agent* agent, float deltaTime)
 	if (!agent->getTargetAgent()->isActive())
 		return Result::FAILURE;
 
-	agent->setVelocity(Vector2(0, 0));
+	agent->setVelocity(glm::vec2(0, 0));
 	agent->resetRespawnTimer();
 	agent->spawnNew();
 	return Result::SUCCESS;

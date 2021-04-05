@@ -42,7 +42,7 @@ void ForestSimApp::initCamera()
 	m_currentPanSpeed = m_panSpeed;
 
 	// position camera in centre of map
-	m_camPos = Vector2(
+	m_camPos = glm::vec2(
 		(m_map->getMapWidthPx() - SCR_WIDTH) * 0.5f,
 		(m_map->getMapHeightPx() - SCR_HEIGHT) * 0.5f);
 

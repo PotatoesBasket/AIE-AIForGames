@@ -1,12 +1,7 @@
 #pragma once
 #include <list>
 #include <vector>
-
-#ifndef NDEBUG
-#include <Debug/MathLibrary.h>
-#else
-#include <Release/MathLibrary.h>
-#endif
+#include <glm/vec2.hpp>
 
 struct Node;
 
@@ -33,5 +28,5 @@ struct Node
 	float finalCost = 0; //runningCost + calculated heuristic cost for sorting openList in A* pathfinding
 
 	//custom data
-	Vector2 position;
+	glm::vec2 position;
 };

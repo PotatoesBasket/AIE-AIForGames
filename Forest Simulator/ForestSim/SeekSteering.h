@@ -4,7 +4,7 @@
 class SeekSteering : public ISteering
 {
 public:
-	Vector2 getForce(Agent* agent) const override;
+	glm::vec2 getForce(Agent* agent) const override;
 
 	void setTarget(Agent* agent) { m_target = agent; }
 

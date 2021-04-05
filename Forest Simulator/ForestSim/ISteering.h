@@ -1,9 +1,5 @@
 #pragma once
-#ifndef NDEBUG
-#include <Debug/MathLibrary.h>
-#else
-#include <Release/MathLibrary.h>
-#endif
+#include <glm/vec2.hpp>
 
 class Agent;
 
@@ -12,5 +8,5 @@ class Agent;
 class ISteering
 {
 public:
-	virtual Vector2 getForce(Agent* agent) const = 0;
+	virtual glm::vec2 getForce(Agent* agent) const = 0;
 };

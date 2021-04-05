@@ -1,15 +1,15 @@
 #include "SeekSteering.h"
 #include "Agent.h"
 
-Vector2 SeekSteering::getForce(Agent* agent) const
+glm::vec2 SeekSteering::getForce(Agent* agent) const
 {
-	Vector2 force = Vector2(0, 0);
+	glm::vec2 force = glm::vec2(0, 0);
 
 	if (!m_target)
 		return force;
 
-	Vector2 velocity =
-		(m_target->getPosition() - agent->getPosition()).normalised() * agent->getMaxForce();
+	glm::vec2 velocity =
+		glm::normalize(m_target->getPosition() - agent->getPosition()) * agent->getMaxForce();
 
 	force = velocity - agent->getVelocity();
 

@@ -7,7 +7,7 @@ public:
 	AgentPool(std::vector<Agent*> agents) { m_agentList = agents; }
 	~AgentPool();
 
-	bool activateNext(Vector2 position, int state = 0); // 0 for fresh stats, 1 for random
+	bool activateNext(glm::vec2 position, int state = 0); // 0 for fresh stats, 1 for random
 	std::vector<Agent*>& getAgentList() { return m_agentList; }
 
 	void update(float deltaTime);

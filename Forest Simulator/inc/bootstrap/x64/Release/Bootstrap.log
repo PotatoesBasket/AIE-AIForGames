@@ -1,0 +1,12 @@
+﻿  imgui.cpp
+  imgui_draw.cpp
+  Application.cpp
+  Font.cpp
+  Gizmos.cpp
+  imgui_glfw3.cpp
+  Input.cpp
+  Renderer2D.cpp
+  Texture.cpp
+  gl_core_4_4.c
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winbase.h(9305,5): warning C5105: macro expansion producing 'defined' has undefined behavior
+  Bootstrap.vcxproj -> C:\Users\Faint\Downloads\aieBootstrap-master\aieBootstrap-master\temp\Bootstrap\x64\Release\Bootstrap.lib

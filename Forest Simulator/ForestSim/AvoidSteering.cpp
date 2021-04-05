@@ -2,19 +2,20 @@
 #include "Agent.h"
 #include "AABB.h"
 #include "Map.h"
+#include <glm/gtx/norm.hpp>
 
-Vector2 AvoidSteering::getForce(Agent* agent) const
+glm::vec2 AvoidSteering::getForce(Agent* agent) const
 {
-	Vector2 force = Vector2(0, 0);
+	glm::vec2 force = glm::vec2(0, 0);
 
 	//calculate a vector representing how far agent can see ahead of them
-	Vector2 ahead = agent->getPosition();
-	Vector2 halfAhead = agent->getPosition();
+	glm::vec2 ahead = agent->getPosition();
+	glm::vec2 halfAhead = agent->getPosition();
 
 	if (agent->getVelocity().x != 0 && agent->getVelocity().y != 0)
 	{
-		ahead = agent->getPosition() + agent->getVelocity().normalised() * agent->getVisionRange();
-		halfAhead = agent->getPosition() + agent->getVelocity().normalised() * agent->getVisionRange() * 0.5f;
+		ahead = agent->getPosition() + glm::normalize(agent->getVelocity()) * agent->getVisionRange();
+		halfAhead = agent->getPosition() + glm::normalize(agent->getVelocity()) * agent->getVisionRange() * 0.5f;
 	}
 
 	AABB* closestObstacle = nullptr;
@@ -32,18 +33,17 @@ Vector2 AvoidSteering::getForce(Agent* agent) const
 		{
 			if (closestObstacle == nullptr)
 				closestObstacle = obstacle.get();
-			else if ((agent->getPosition().distanceSqr(obstacle->center()) <
-				agent->getPosition().distanceSqr(closestObstacle->center())))
+			else if (glm::length2(obstacle->center() - agent->getPosition()) < glm::length2(closestObstacle->center() - agent->getPosition()))
 				closestObstacle = obstacle.get();
 		}
 	}
 
 	if (closestObstacle != nullptr)
 	{
-		Vector2 distance = ahead - closestObstacle->center();
+		glm::vec2 distance = ahead - closestObstacle->center();
 
 		if (distance.x != 0 && distance.y != 0)
-			force = distance.normalised() * agent->getMaxAvoidForce();
+			force = glm::normalize(distance) * agent->getMaxAvoidForce();
 	}
 
 	return force;

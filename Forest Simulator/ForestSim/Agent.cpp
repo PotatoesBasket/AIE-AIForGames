@@ -1,6 +1,8 @@
 #include "Agent.h"
 #include "IBehaviour.h"
 #include "Map.h"
+#include <glm/gtx/norm.hpp>
+#include <glm/geometric.hpp>
 
 void Agent::update(float deltaTime)
 {
@@ -13,8 +15,8 @@ void Agent::update(float deltaTime)
 		updateBehaviours();
 
 		//clamp velocity
-		if (m_velocity.magnitudeSqr() > m_maxVelocity * m_maxVelocity)
-			m_velocity = m_velocity.normalised() * m_maxVelocity;
+		if (glm::length2(m_velocity) > m_maxVelocity * m_maxVelocity)
+			m_velocity = glm::normalize(m_velocity) * m_maxVelocity;
 
 		//update position
 		setPosition(getPosition() + m_velocity * deltaTime);

@@ -2,7 +2,7 @@
 #include "Sprite.h"
 #include "RNG.h"
 
-Grass::Grass(Vector2 position)
+Grass::Grass(glm::vec2 position)
 {
 	setPosition(position);
 

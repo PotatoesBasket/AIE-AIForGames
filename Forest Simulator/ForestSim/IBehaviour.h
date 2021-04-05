@@ -1,9 +1,4 @@
 #pragma once
-#ifndef NDEBUG
-#include <Debug/MathLibrary.h>
-#else
-#include <Release/MathLibrary.h>
-#endif
 
 class Agent;
 

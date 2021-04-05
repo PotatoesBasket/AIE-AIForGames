@@ -1,18 +1,18 @@
 #include "AABB.h"
 
 /*Returns the position of the bounding box's centre.*/
-Vector2 AABB::center() const
+glm::vec2 AABB::center() const
 {
 	return (m_min + m_max) * 0.5f;
 }
 
-Vector2 AABB::closestPoint(const Vector2& point) const
+glm::vec2 AABB::closestPoint(const glm::vec2& point) const
 {
 	return clamp(point, m_min, m_max);
 }
 
 /*Returns true if bounding box is encompassing a given point.*/
-bool AABB::isInsideBox(const Vector2& point) const
+bool AABB::isInsideBox(const glm::vec2& point) const
 {
 	//if any of these are false, there is no overlap
 	return !(point.x < m_min.x || point.y < m_min.y ||
@@ -28,10 +28,10 @@ bool AABB::overlaps(const AABB& box) const
 
 void AABB::update(GameObject* gameObject, float deltaTime)
 {
-	m_min.x = gameObject->getLocalTransform().translation.x - width() * 0.5f;
-	m_min.y = gameObject->getLocalTransform().translation.y - height() * 0.5f;
-	m_max.x = gameObject->getLocalTransform().translation.x + width() * 0.5f;
-	m_max.y = gameObject->getLocalTransform().translation.y + height() * 0.5f;
+	m_min.x = gameObject->getLocalTransform()[2][0] - width() * 0.5f;
+	m_min.y = gameObject->getLocalTransform()[2][1] - height() * 0.5f;
+	m_max.x = gameObject->getLocalTransform()[2][0] + width() * 0.5f;
+	m_max.y = gameObject->getLocalTransform()[2][1] + height() * 0.5f;
 }
 
 void AABB::draw(std::shared_ptr<aie::Renderer2D> renderer)
@@ -51,7 +51,7 @@ float AABB::clamp(float t, float a, float b) const
 	return max(a, min(b, t));
 }
 
-Vector2 AABB::clamp(const Vector2& t, const Vector2& a, const Vector2& b) const
+glm::vec2 AABB::clamp(const glm::vec2& t, const glm::vec2& a, const glm::vec2& b) const
 {
 	return max(a, min(b, t));
 }

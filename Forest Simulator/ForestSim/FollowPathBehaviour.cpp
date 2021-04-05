@@ -8,7 +8,7 @@ IBehaviour::Result FollowPathBehaviour::update(Agent* agent, float deltaTime)
 		return SUCCESS;
 
 	// get position of next node in path
-	Vector2 target = agent->getPath().front()->position;
+	glm::vec2 target = agent->getPath().front()->position;
 
 	// distance to node
 	float xDiff = target.x - agent->getPosition().x;
@@ -19,8 +19,8 @@ IBehaviour::Result FollowPathBehaviour::update(Agent* agent, float deltaTime)
 	// if not at the target, move towards it
 	if (distanceSqr > m_radius * m_radius)
 	{
-		Vector2 velocity = (target - agent->getPosition()).normalised() * agent->getMaxForce();
-		Vector2 force = velocity - agent->getVelocity();
+		glm::vec2 velocity = glm::normalize(target - agent->getPosition()) * agent->getMaxForce();
+		glm::vec2 force = velocity - agent->getVelocity();
 
 		agent->addForce(force * deltaTime);
 		return ONGOING;

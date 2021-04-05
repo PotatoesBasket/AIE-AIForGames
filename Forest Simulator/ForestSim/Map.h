@@ -18,8 +18,8 @@ public:
 	void onUpdate(float deltaTime) override;
 	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;
 
-	Vector2 getRandomTraversablePos();
-	Node* getNodeAtPosition(Vector2 position);
+	glm::vec2 getRandomTraversablePos();
+	Node* getNodeAtPosition(glm::vec2 position);
 
 	unsigned int getTileSize() const { return m_tileSize; }
 	unsigned int getMapWidthCells() const { return m_mapCols; }

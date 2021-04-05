@@ -109,7 +109,7 @@ void Map::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 	m_foxes->draw(renderer);
 }
 
-Vector2 Map::getRandomTraversablePos()
+glm::vec2 Map::getRandomTraversablePos()
 {
 	RNG& rng = RNG::getInstance();
 	rng.setIntRange(0, m_tiles.size() - 1);
@@ -123,7 +123,7 @@ Vector2 Map::getRandomTraversablePos()
 }
 
 // Gets ptr for the node located at given pixel coords
-Node* Map::getNodeAtPosition(Vector2 position)
+Node* Map::getNodeAtPosition(glm::vec2 position)
 {
 	Node* node = nullptr;
 
@@ -161,7 +161,7 @@ void Map::loadMapData()
 		//create specific tile
 		case '0': //walkable ground
 			m_tiles.push_back(std::make_unique<Tile>(Tile::ground,
-				Vector2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
+				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			++currentCol;
 
@@ -169,7 +169,7 @@ void Map::loadMapData()
 
 		case '1': //water
 			m_tiles.push_back(std::make_unique<Tile>(Tile::water,
-				Vector2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
+				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			createObstacle(currentCol, (m_mapRows - currentRow));
 
@@ -179,7 +179,7 @@ void Map::loadMapData()
 
 		case '2': //tree
 			m_tiles.push_back(std::make_unique<Tile>(Tile::tree,
-				Vector2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
+				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			createObstacle(currentCol, (m_mapRows - currentRow));
 
@@ -189,10 +189,10 @@ void Map::loadMapData()
 
 		case '3': //edible grass
 			m_tiles.push_back(std::make_unique<Tile>(Tile::grass,
-				Vector2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
+				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			m_grassPatches.push_back(std::make_unique<Grass>(
-				Vector2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
+				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			++currentCol;
 
@@ -282,6 +282,6 @@ void Map::setMapConnections()
 void Map::createObstacle(float x, float y)
 {
 	m_obstacles.push_back(std::make_unique<AABB>(
-		Vector2(x * m_tileSize - (m_tileSize * 0.5f), y * m_tileSize - (m_tileSize * 0.5f)),
-		Vector2(x * m_tileSize + m_tileSize - (m_tileSize * 0.5f), y * m_tileSize + m_tileSize - (m_tileSize * 0.5f))));
+		glm::vec2(x * m_tileSize - (m_tileSize * 0.5f), y * m_tileSize - (m_tileSize * 0.5f)),
+		glm::vec2(x * m_tileSize + m_tileSize - (m_tileSize * 0.5f), y * m_tileSize + m_tileSize - (m_tileSize * 0.5f))));
 }

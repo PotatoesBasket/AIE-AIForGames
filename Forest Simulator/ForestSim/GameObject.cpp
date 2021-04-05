@@ -51,36 +51,36 @@ void GameObject::updateTransform()
 
 void GameObject::move(float x, float y)
 {
-	m_localTransform.move(x, y);
+	m_localTransform = glm::translate(m_localTransform, glm::vec2(x, y));
 	updateTransform();
 }
-void GameObject::move(const Vector2& v)
+void GameObject::move(const glm::vec2& v)
 {
-	m_localTransform.move(v);
+	m_localTransform = glm::translate(m_localTransform, v);
 	updateTransform();
 }
 
 void GameObject::rotate(float radians)
 {
-	m_localTransform.rotateZ(radians);
+	m_localTransform = glm::rotate(m_localTransform, radians);
 	updateTransform();
 }
 
 void GameObject::scale(float wMultiplier, float hMultiplier)
 {
-	m_localTransform.scale(wMultiplier, hMultiplier, 1);
+	m_localTransform = glm::scale(m_localTransform, glm::vec2(wMultiplier, hMultiplier));
 	updateTransform();
 }
 void GameObject::scale(float multiplier)
 {
-	m_localTransform.scale(Vector3(multiplier, multiplier, 1));
+	m_localTransform = glm::scale(m_localTransform, glm::vec2(multiplier, multiplier));
 	updateTransform();
 }
 
 void GameObject::resetTransform()
 {
-	m_localTransform = Matrix3::identity;
-	m_globalTransform = Matrix3::identity;
+	m_localTransform = glm::mat3(1.0f);
+	m_globalTransform = glm::mat3(1.0f);
 }
 
 

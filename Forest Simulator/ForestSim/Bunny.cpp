@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "Life.h"
 #include "Grass.h"
+#include <glm/gtx/norm.hpp>
 
 void Bunny::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 {
@@ -140,7 +141,7 @@ Node* Bunny::getNearestFood()
 		if (closestGrass == nullptr)
 			closestGrass = grass.get();
 		// otherwise, compare with current closest
-		else if (getPosition().distanceSqr(grass->getPosition()) < getPosition().distanceSqr(closestGrass->getPosition()))
+		else if (glm::length2(grass->getPosition() - getPosition()) < glm::length2(closestGrass->getPosition() - getPosition()))
 			closestGrass = grass.get();
 	}
 
@@ -180,7 +181,7 @@ Node* Bunny::getNearestMate()
 		if (closestMate == nullptr)
 			closestMate = bunny;
 		// otherwise, compare with current closest
-		else if (getPosition().distanceSqr(bunny->getPosition()) < getPosition().distanceSqr(closestMate->getPosition()))
+		else if (glm::length2(bunny->getPosition() - getPosition()) < glm::length2(closestMate->getPosition() - getPosition()))
 			closestMate = bunny;
 	}
 

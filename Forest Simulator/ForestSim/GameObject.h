@@ -3,12 +3,8 @@
 #include <memory>
 #include <string>
 #include <Renderer2D.h>
-
-#ifndef NDEBUG
-#include <Debug/MathLibrary.h>
-#else
-#include <Release/MathLibrary.h>
-#endif
+#include <glm/glm.hpp>
+#include <glm/gtx/matrix_transform_2d.hpp>
 
 class Component;
 
@@ -35,19 +31,19 @@ public:
 	// TRANSFORM MATRIX //
 	//////////////////////
 
-	const Matrix3& getLocalTransform() const { return m_localTransform; }
-	const Matrix3& getGlobalTransform() const { return m_globalTransform; }
+	const glm::mat3& getLocalTransform() const { return m_localTransform; }
+	const glm::mat3& getGlobalTransform() const { return m_globalTransform; }
 	float* getLocalTransformFloat() const { return (float*)& m_localTransform; }
 	float* getGlobalTransformFloat() const { return (float*)& m_globalTransform; }
 
-	void setLocalTransform(const Matrix3& m) { m_localTransform = m; }
-	void setGlobalTransform(const Matrix3& m) { m_globalTransform = m; }
+	void setLocalTransform(const glm::mat3& m) { m_localTransform = m; }
+	void setGlobalTransform(const glm::mat3& m) { m_globalTransform = m; }
 
-	void setPosition(Vector2 position) { m_globalTransform.translation = position; }
-	Vector2 getPosition() const { return (Vector2(m_globalTransform.translation.x, m_globalTransform.translation.y)); }
+	void setPosition(glm::vec2 position) { m_globalTransform = glm::translate(glm::mat3(1.0f), position); }
+	glm::vec2 getPosition() const { return (glm::vec2(m_globalTransform[2][0], m_globalTransform[2][1])); }
 
 	void move(float x, float y);
-	void move(const Vector2& v);
+	void move(const glm::vec2& v);
 
 	void rotate(float degrees);
 
@@ -81,8 +77,8 @@ public:
 protected:
 	bool m_active = true;
 
-	Matrix3 m_localTransform = Matrix3::identity;
-	Matrix3 m_globalTransform = Matrix3::identity;
+	glm::mat3 m_localTransform = glm::mat3(1.0f);
+	glm::mat3 m_globalTransform = glm::mat3(1.0f);
 
 	std::vector<std::shared_ptr<Component>> m_components;
 

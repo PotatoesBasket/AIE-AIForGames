@@ -1,6 +1,7 @@
 #include "Conditions.h"
 #include "Agent.h"
 #include "Map.h"
+#include <glm/gtx/norm.hpp>
 
 IBehaviour::Result DangerCondition::update(Agent* agent, float deltaTime)
 {
@@ -17,14 +18,14 @@ IBehaviour::Result DangerCondition::update(Agent* agent, float deltaTime)
 		if (closestPredator == nullptr)
 			closestPredator = predator;
 		// otherwise, compare with current closest
-		else if (agent->getPosition().distanceSqr(predator->getPosition()) <
-			agent->getPosition().distanceSqr(closestPredator->getPosition()))
+		else if (glm::length2(predator->getPosition() - agent->getPosition()) <
+			glm::length2(closestPredator->getPosition() - agent->getPosition()))
 			closestPredator = predator;
 	}
 
 	// check if predator is close enough to flee from
 	if (closestPredator != nullptr &&
-		agent->getPosition().distanceSqr(closestPredator->getPosition()) < fleeRange * fleeRange)
+		glm::length2(closestPredator->getPosition() - agent->getPosition()) < fleeRange * fleeRange)
 	{
 		agent->setTargetAgent(closestPredator);
 		return Result::SUCCESS;

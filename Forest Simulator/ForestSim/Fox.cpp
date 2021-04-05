@@ -1,6 +1,7 @@
 #include "Fox.h"
 #include "Map.h"
 #include "Life.h"
+#include <glm/gtx/norm.hpp>
 
 void Fox::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 {
@@ -124,7 +125,7 @@ Node* Fox::getNearestFood()
 		if (closestPrey == nullptr)
 			closestPrey = prey;
 		// otherwise, compare with current closest
-		else if (getPosition().distanceSqr(prey->getPosition()) < getPosition().distanceSqr(closestPrey->getPosition()))
+		else if (glm::length2(prey->getPosition() - getPosition()) < glm::length2(closestPrey->getPosition() - getPosition()))
 			closestPrey = prey;
 	}
 
@@ -164,7 +165,7 @@ Node* Fox::getNearestMate()
 		if (closestMate == nullptr)
 			closestMate = fox;
 		// otherwise, compare with current closest
-		else if (getPosition().distanceSqr(fox->getPosition()) < getPosition().distanceSqr(closestMate->getPosition()))
+		else if (glm::length2(fox->getPosition() - getPosition()) < glm::length2(closestMate->getPosition() - getPosition()))
 			closestMate = fox;
 	}
 

@@ -1,4 +1,0 @@
-﻿  FleeSteering.cpp
-C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Agent.h(10): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
-  C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\ForestSim\Graph.h(25): note: see declaration of 'Node'
-  ForestSim.vcxproj -> C:\Users\Faint\Documents\Visual Studio 2019\Projects\Diploma\5. Artificial Intelligence for Games\AIE-AIForGames\Forest Simulator\temp\ForestSim\x64\Debug\ForestSim.exe

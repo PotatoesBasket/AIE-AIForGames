@@ -16,7 +16,7 @@ class Fox : public Agent
 {
 public:
 	Fox() { init(); }
-	Fox(Vector2 position) { init(); setPosition(position); }
+	Fox(glm::vec2 position) { init(); setPosition(position); }
 	virtual ~Fox() {}
 
 	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;

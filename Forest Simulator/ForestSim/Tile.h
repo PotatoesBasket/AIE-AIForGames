@@ -15,12 +15,12 @@ public:
 		grass
 	};
 	
-	Tile(Type type, Vector2 position) : m_type(type) { this->position = position; }
+	Tile(Type type, glm::vec2 position) : m_type(type) { this->position = position; }
 	~Tile() {}
 
 	void addEdge(Node* target, float cost = 1) { outgoingEdges.push_back(Edge(target, cost)); }
 
-	Vector2 const getPosition() { return position; }
+	glm::vec2 const getPosition() { return position; }
 	Type const getType() { return m_type; }
 
 private:

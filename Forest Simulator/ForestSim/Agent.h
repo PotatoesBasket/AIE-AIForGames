@@ -54,10 +54,10 @@ public:
 
 	std::list<Node*>& getPath() { return m_path; }
 
-	void addForce(Vector2 force) { m_velocity += force; }
+	void addForce(glm::vec2 force) { m_velocity += force; }
 
-	Vector2 getVelocity() const { return m_velocity; }
-	void setVelocity(Vector2 velocity) { m_velocity = velocity; }
+	glm::vec2 getVelocity() const { return m_velocity; }
+	void setVelocity(glm::vec2 velocity) { m_velocity = velocity; }
 
 	float getMaxForce() const { return m_maxForce; }
 	float getMaxVelocity() const { return m_maxVelocity; }
@@ -88,7 +88,7 @@ protected:
 
 	std::list<Node*> m_path;
 
-	Vector2 m_velocity;
+	glm::vec2 m_velocity;
 
 	float m_maxVelocity = 0;
 	float m_maxForce = 0;
