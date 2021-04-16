@@ -28,7 +28,7 @@ Map::Map()
 		bunnies[i]->setMap(this);
 		bunnies[i]->setActiveState(false);
 	}
-	m_bunnies = new AgentPool(bunnies);
+	m_bunnies = std::make_unique<AgentPool>(bunnies);
 
 	// create foxes for pool
 	std::vector<Agent*> foxes;
@@ -38,7 +38,7 @@ Map::Map()
 		foxes[i]->setMap(this);
 		foxes[i]->setActiveState(false);
 	}
-	m_foxes = new AgentPool(foxes);
+	m_foxes = std::make_unique<AgentPool>(foxes);
 
 	// set active beginning number of agents
 	for (int i = 0; i < 20; ++i)
@@ -46,6 +46,8 @@ Map::Map()
 
 	for (int i = 0; i < 10; ++i)
 		m_foxes->activateNext(getRandomTraversablePos(), 1);
+
+	fillQuadtrees();
 }
 
 void Map::onUpdate(float deltaTime)
@@ -55,25 +57,27 @@ void Map::onUpdate(float deltaTime)
 
 	m_bunnies->update(deltaTime);
 	m_foxes->update(deltaTime);
+
+	fillQuadtrees();
 }
 
-void Map::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
+void Map::onDraw(aie::Renderer2D* renderer)
 {
 	// draw tiles
 	for (auto& tile : m_tiles)
 	{
-		if (tile->getType() != Tile::grass)
+		if (tile->getType() != Tile::Type::grass)
 		{
 			renderer->setUVRect(
-				tile->getType() * m_percentWidth,
-				tile->getType() * m_percentHeight,
+				(int)tile->getType() * m_percentWidth,
+				(int)tile->getType() * m_percentHeight,
 				m_percentWidth, m_percentHeight);
 		}
 		else //grass sprite is drawn seperately, so draw ground instead
 		{
 			renderer->setUVRect(
-				Tile::ground * m_percentWidth,
-				Tile::ground * m_percentHeight,
+				(int)Tile::Type::ground * m_percentWidth,
+				(int)Tile::Type::ground * m_percentHeight,
 				m_percentWidth, m_percentHeight);
 		} //yeah its dumb
 
@@ -82,31 +86,32 @@ void Map::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
 	}
 	renderer->setUVRect(1, 1, 1, 1);
 
-#ifndef NDEBUG
-	// draw node connections
-	renderer->setRenderColour(1, 0, 0, 1);
-	for (auto& tile : m_tiles)
-	{
-		for (auto& edge : tile->outgoingEdges)
-		{
-			renderer->drawLine(tile->getPosition().x, tile->getPosition().y,
-				edge.targetNode->position.x, edge.targetNode->position.y);
-		}
-	}
-	renderer->setRenderColour(1, 1, 1, 1);
+	//// draw node connections
+	//renderer->setRenderColour(1, 0, 0, 1);
+	//for (auto& tile : m_tiles)
+	//{
+	//	for (auto& edge : tile->outgoingEdges)
+	//	{
+	//		renderer->drawLine(tile->getPosition().x, tile->getPosition().y,
+	//			edge.targetNode->position.x, edge.targetNode->position.y);
+	//	}
+	//}
+	//renderer->setRenderColour(1, 1, 1, 1);
 
-	// draw obstacle AABBs
-	for (auto& obstacle : m_obstacles)
-	{
-		obstacle->draw(renderer);
-	}
-#endif
+	//// draw obstacle AABBs
+	//for (auto& obstacle : m_obstacles)
+	//{
+	//	obstacle->draw(renderer);
+	//}
 
 	for (auto& grass : m_grassPatches)
 		grass->draw(renderer);
 
 	m_bunnies->draw(renderer);
 	m_foxes->draw(renderer);
+
+	m_bunnyTree->draw(renderer);
+	m_foxTree->draw(renderer);
 }
 
 glm::vec2 Map::getRandomTraversablePos()
@@ -117,7 +122,7 @@ glm::vec2 Map::getRandomTraversablePos()
 	int index = 0;
 
 	do index = rng.nextInt();
-	while (m_tiles[index]->getType() != Tile::ground);
+	while (m_tiles[index]->getType() != Tile::Type::ground);
 
 	return m_tiles[index]->position;
 }
@@ -149,8 +154,8 @@ void Map::loadMapData()
 	if (!file.is_open())
 		throw new std::exception("map data invalid");
 
-	int currentCol = 0;
-	int currentRow = 0;
+	unsigned int currentCol = 0;
+	unsigned int currentRow = 0;
 
 	while (true)
 	{
@@ -160,7 +165,7 @@ void Map::loadMapData()
 		{
 		//create specific tile
 		case '0': //walkable ground
-			m_tiles.push_back(std::make_unique<Tile>(Tile::ground,
+			m_tiles.push_back(std::make_unique<Tile>(Tile::Type::ground,
 				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			++currentCol;
@@ -168,7 +173,7 @@ void Map::loadMapData()
 			continue;
 
 		case '1': //water
-			m_tiles.push_back(std::make_unique<Tile>(Tile::water,
+			m_tiles.push_back(std::make_unique<Tile>(Tile::Type::water,
 				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			createObstacle(currentCol, (m_mapRows - currentRow));
@@ -178,7 +183,7 @@ void Map::loadMapData()
 			continue;
 
 		case '2': //tree
-			m_tiles.push_back(std::make_unique<Tile>(Tile::tree,
+			m_tiles.push_back(std::make_unique<Tile>(Tile::Type::tree,
 				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			createObstacle(currentCol, (m_mapRows - currentRow));
@@ -188,7 +193,7 @@ void Map::loadMapData()
 			continue;
 
 		case '3': //edible grass
-			m_tiles.push_back(std::make_unique<Tile>(Tile::grass,
+			m_tiles.push_back(std::make_unique<Tile>(Tile::Type::grass,
 				glm::vec2(currentCol * m_tileSize, (m_mapRows - currentRow) * m_tileSize)));
 
 			m_grassPatches.push_back(std::make_unique<Grass>(
@@ -215,10 +220,10 @@ void Map::loadMapData()
 // Set up graph for A* pathfinding
 void Map::setMapConnections()
 {
-	for (int i = 0; i < m_tiles.size(); ++i)
+	for (size_t i = 0; i < m_tiles.size(); ++i)
 	{
-		if (m_tiles[i]->getType() == Tile::water ||
-			m_tiles[i]->getType() == Tile::tree)
+		if (m_tiles[i]->getType() == Tile::Type::water ||
+			m_tiles[i]->getType() == Tile::Type::tree)
 			continue; //tile impassable, go to next one
 
 		bool N = false;
@@ -227,53 +232,53 @@ void Map::setMapConnections()
 		bool E = false;
 
 		//check adjacent tiles
-		if (i - 1 > 0 && i % m_mapCols != 0 &&
-			(m_tiles[i - 1]->getType() == Tile::ground ||
-				m_tiles[i - 1]->getType() == Tile::grass))
+		if (i - 1 > 0 && i % m_mapCols != 0
+			&& (m_tiles[i - 1]->getType() == Tile::Type::ground
+				|| m_tiles[i - 1]->getType() == Tile::Type::grass))
 		{
 			m_tiles[i]->addEdge(m_tiles[i - 1].get());
 			W = true;
 		}
 
-		if (i + 1 < m_tiles.size() && i + 1 % m_mapCols != 0 &&
-			(m_tiles[i + 1]->getType() == Tile::ground ||
-				m_tiles[i + 1]->getType() == Tile::grass))
+		if (i + 1 < (int)m_tiles.size() && i + 1 % m_mapCols != 0
+			&& (m_tiles[i + 1]->getType() == Tile::Type::ground
+				|| m_tiles[i + 1]->getType() == Tile::Type::grass))
 		{
 			m_tiles[i]->addEdge(m_tiles[i + 1].get());
 			E = true;
 		}
 
-		if (i - m_mapCols > 0 &&
-			(m_tiles[i - m_mapCols]->getType() == Tile::ground ||
-				m_tiles[i - m_mapCols]->getType() == Tile::grass))
+		if (i - m_mapCols > 0
+			&& (m_tiles[i - m_mapCols]->getType() == Tile::Type::ground
+				|| m_tiles[i - m_mapCols]->getType() == Tile::Type::grass))
 		{
 			m_tiles[i]->addEdge(m_tiles[i - m_mapCols].get());
 			N = true;
 		}
 
-		if (i + m_mapCols < m_tiles.size() &&
-			(m_tiles[i + m_mapCols]->getType() == Tile::ground ||
-				m_tiles[i + m_mapCols]->getType() == Tile::grass))
+		if (i + m_mapCols < m_tiles.size()
+			&& (m_tiles[i + m_mapCols]->getType() == Tile::Type::ground
+				|| m_tiles[i + m_mapCols]->getType() == Tile::Type::grass))
 		{
 			m_tiles[i]->addEdge(m_tiles[i + m_mapCols].get());
 			S = true;
 		}
 
 		//check diagonals
-		if (N && W && (m_tiles[i - m_mapCols - 1]->getType() == Tile::ground ||
-			m_tiles[i - m_mapCols - 1]->getType() == Tile::grass))
+		if (N && W && (m_tiles[i - m_mapCols - 1]->getType() == Tile::Type::ground
+			|| m_tiles[i - m_mapCols - 1]->getType() == Tile::Type::grass))
 			m_tiles[i]->addEdge(m_tiles[i - m_mapCols - 1].get());
 
-		if (N && E && (m_tiles[i - m_mapCols + 1]->getType() == Tile::ground ||
-			m_tiles[i - m_mapCols + 1]->getType() == Tile::grass))
+		if (N && E && (m_tiles[i - m_mapCols + 1]->getType() == Tile::Type::ground
+			|| m_tiles[i - m_mapCols + 1]->getType() == Tile::Type::grass))
 			m_tiles[i]->addEdge(m_tiles[i - m_mapCols + 1].get());
 
-		if (S && W && (m_tiles[i + m_mapCols - 1]->getType() == Tile::ground ||
-			m_tiles[i + m_mapCols - 1]->getType() == Tile::grass))
+		if (S && W && (m_tiles[i + m_mapCols - 1]->getType() == Tile::Type::ground
+			|| m_tiles[i + m_mapCols - 1]->getType() == Tile::Type::grass))
 			m_tiles[i]->addEdge(m_tiles[i + m_mapCols - 1].get());
 
-		if (S && E && (m_tiles[i + m_mapCols + 1]->getType() == Tile::ground ||
-			m_tiles[i + m_mapCols + 1]->getType() == Tile::grass))
+		if (S && E && (m_tiles[i + m_mapCols + 1]->getType() == Tile::Type::ground
+			|| m_tiles[i + m_mapCols + 1]->getType() == Tile::Type::grass))
 			m_tiles[i]->addEdge(m_tiles[i + m_mapCols + 1].get());
 	}
 }
@@ -284,4 +289,34 @@ void Map::createObstacle(float x, float y)
 	m_obstacles.push_back(std::make_unique<AABB>(
 		glm::vec2(x * m_tileSize - (m_tileSize * 0.5f), y * m_tileSize - (m_tileSize * 0.5f)),
 		glm::vec2(x * m_tileSize + m_tileSize - (m_tileSize * 0.5f), y * m_tileSize + m_tileSize - (m_tileSize * 0.5f))));
+}
+
+void Map::fillQuadtrees()
+{
+	m_bunnyTree = std::make_unique<Quadtree>(
+		AABB(glm::vec2(0.0f), glm::vec2(getMapWidthPx(), getMapHeightPx())), 1);
+
+	for (auto& bunny : getBunnyPool()->getAgentList())
+	{
+		if (bunny->isActive())
+			m_bunnyTree->insert(bunny);
+	}
+
+	m_foxTree = std::make_unique<Quadtree>(
+		AABB(glm::vec2(0.0f), glm::vec2(getMapWidthPx(), getMapHeightPx())), 1);
+
+	for (auto& fox : getFoxPool()->getAgentList())
+	{
+		if (fox->isActive())
+			m_foxTree->insert(fox);
+	}
+
+	m_grassTree = std::make_unique<Quadtree>(
+		AABB(glm::vec2(0.0f), glm::vec2(getMapWidthPx(), getMapHeightPx())), 1);
+	
+	for (auto& grass : m_grassPatches)
+	{
+		if (grass->isEdible())
+			m_grassTree->insert(grass.get());
+	}
 }

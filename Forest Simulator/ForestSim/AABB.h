@@ -5,8 +5,8 @@
 class AABB
 {
 public:
-	AABB(const glm::vec2& min, const glm::vec2& max) : m_min(min), m_max(max),
-		m_width(max.x - min.x), m_height(max.y - min.y) {}
+	AABB(const glm::vec2& min, const glm::vec2& max);
+	AABB(const glm::vec2& center, float width, float height);
 	~AABB() {}
 
 	glm::vec2 center() const;
@@ -14,11 +14,12 @@ public:
 	float height() const { return m_height; }
 	glm::vec2 closestPoint(const glm::vec2& point) const;
 
-	bool isInsideBox(const glm::vec2& point) const;
-	bool overlaps(const AABB& other) const;
+	bool containsPoint(const glm::vec2& point) const;
+	bool overlapsAABB(const AABB& other) const;
+	bool overlapsCircle(const glm::vec2& circleCenter, float circleRadius) const;
 
 	void update(GameObject* gameObject, float deltaTime); //update position
-	void draw(std::shared_ptr<aie::Renderer2D> renderer); //debug only
+	void draw(aie::Renderer2D* renderer); //debug only
 
 	float min(float a, float b) const { return a < b ? a : b; }
 	float max(float a, float b) const { return a > b ? a : b; }

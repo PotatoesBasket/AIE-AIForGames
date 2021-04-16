@@ -7,5 +7,5 @@ IBehaviour::Result SteeringBehaviour::update(Agent* agent, float deltaTime)
 
 		agent->addForce(force->getForce(agent) * deltaTime);
 
-	return SUCCESS;
+	return Result::SUCCESS;
 }

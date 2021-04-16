@@ -8,12 +8,12 @@ IBehaviour::Result NewPathBehaviour::update(Agent* agent, float deltaTime)
 	agent->getPath().clear();
 
 	Node* first = agent->getCurrentNode();
-	Node* end = agent->getTargetNode();
+	Node* end = agent->m_targetNode;
 
 	if (first == nullptr || end == nullptr)
 	{
 		agent->getPath().clear();
-		return IBehaviour::FAILURE;
+		return IBehaviour::Result::FAILURE;
 	}
 
 	Pathfinding::HeuristicFunc heuristic = Pathfinding::diagonalShortcut;
@@ -21,9 +21,9 @@ IBehaviour::Result NewPathBehaviour::update(Agent* agent, float deltaTime)
 	if (Pathfinding::findPathAStar(first, end, agent->getPath(), heuristic(first, end)))
 	{
 		agent->getPath().pop_front();
-		return IBehaviour::SUCCESS;
+		return IBehaviour::Result::SUCCESS;
 	}
 
 	agent->getPath().clear();
-	return IBehaviour::FAILURE;
+	return IBehaviour::Result::FAILURE;
 }

@@ -31,13 +31,13 @@ bool AgentPool::activateNext(glm::vec2 position, int state)
 /*Calls update on all agents in pool.*/
 void AgentPool::update(float deltaTime)
 {
-	for (auto agent : m_agentList)
+	for (auto& agent : m_agentList)
 		agent->update(deltaTime);
 }
 
 /*Calls draw on all agents in pool.*/
-void AgentPool::draw(std::shared_ptr<aie::Renderer2D> renderer)
+void AgentPool::draw(aie::Renderer2D* renderer)
 {
-	for (auto agent : m_agentList)
+	for (auto& agent : m_agentList)
 		agent->draw(renderer);
 }

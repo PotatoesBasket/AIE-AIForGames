@@ -18,10 +18,10 @@ public:
 	void setActiveState(bool state) { m_active = state; }
 
 	virtual void update(float deltaTime);
-	void draw(std::shared_ptr<aie::Renderer2D> renderer);
+	virtual void draw(aie::Renderer2D* renderer);
 
 	virtual void onUpdate(float deltaTime) {};
-	virtual void onDraw(std::shared_ptr<aie::Renderer2D> renderer) {};
+	virtual void onDraw(aie::Renderer2D* renderer) {};
 
 private:
 	void updateTransform();
@@ -92,7 +92,7 @@ public:
 	virtual ~Component() {}
 
 	virtual void update(GameObject* parent, float deltaTime) {}
-	virtual void draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> renderer) {}
+	virtual void draw(GameObject* parent, aie::Renderer2D* renderer) {}
 	
 	bool isActive() const { return m_active; }
 	void setActiveState(bool state) { m_active = state; }

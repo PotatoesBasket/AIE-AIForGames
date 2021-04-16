@@ -10,8 +10,8 @@ bool ForestSimApp::startup()
 	RNG& rng = RNG::getInstance();
 	rng.setSeed((int)time);
 
-	m_2dRenderer = std::make_shared<aie::Renderer2D>();
-	m_map = new Map();
+	m_2dRenderer = std::make_unique<aie::Renderer2D>();
+	m_map = std::make_unique<Map>();
 	
 	initCamera();
 
@@ -20,9 +20,9 @@ bool ForestSimApp::startup()
 
 void ForestSimApp::update(float deltaTime)
 {
-	camControls(deltaTime);
+	camControls(cappedDeltaTime(deltaTime));
 
-	m_map->update(deltaTime);
+	m_map->update(cappedDeltaTime(deltaTime));
 }
 
 void ForestSimApp::draw()
@@ -31,7 +31,7 @@ void ForestSimApp::draw()
 
 	m_2dRenderer->begin();
 
-	m_map->draw(m_2dRenderer);
+	m_map->draw(m_2dRenderer.get());
 
 	m_2dRenderer->end();
 }
@@ -109,34 +109,34 @@ void ForestSimApp::camControls(float deltaTime)
 	switch (m_zoomLevel)
 	{
 	case 0:
-		if (m_camPos.x < 0 - SCR_WIDTH * 0.25f - halfTileSize)
-			m_camPos.x = 0 - SCR_WIDTH * 0.25f - halfTileSize;
+		if (m_camPos.x < 0.0f - SCR_WIDTH * 0.25f - halfTileSize)
+			m_camPos.x = 0.0f - SCR_WIDTH * 0.25f - halfTileSize;
 		if (m_camPos.x > m_map->getMapWidthPx() - SCR_WIDTH * 0.75f - halfTileSize)
 			m_camPos.x = m_map->getMapWidthPx() - SCR_WIDTH * 0.75f - halfTileSize;
-		if (m_camPos.y < 0 - SCR_HEIGHT * 0.25f + halfTileSize)
-			m_camPos.y = 0 - SCR_HEIGHT * 0.25f + halfTileSize;
+		if (m_camPos.y < 0.0f - SCR_HEIGHT * 0.25f + halfTileSize)
+			m_camPos.y = 0.0f - SCR_HEIGHT * 0.25f + halfTileSize;
 		if (m_camPos.y > m_map->getMapHeightPx() - SCR_HEIGHT * 0.75f + halfTileSize)
 			m_camPos.y = m_map->getMapHeightPx() - SCR_HEIGHT * 0.75f + halfTileSize;
 		break;
 
 	case 1:
-		if (m_camPos.x < 0 - halfTileSize)
-			m_camPos.x = 0 - halfTileSize;
+		if (m_camPos.x < 0.0f - halfTileSize)
+			m_camPos.x = 0.0f - halfTileSize;
 		if (m_camPos.x > m_map->getMapWidthPx() - SCR_WIDTH - halfTileSize)
 			m_camPos.x = m_map->getMapWidthPx() - SCR_WIDTH - halfTileSize;
-		if (m_camPos.y < 0 + halfTileSize)
-			m_camPos.y = 0 + halfTileSize;
+		if (m_camPos.y < 0.0f + halfTileSize)
+			m_camPos.y = 0.0f + halfTileSize;
 		if (m_camPos.y > m_map->getMapHeightPx() - SCR_HEIGHT + halfTileSize)
 			m_camPos.y = m_map->getMapHeightPx() - SCR_HEIGHT + halfTileSize;
 		break;
 
 	case 2:
-		if (m_camPos.x < 0 + SCR_WIDTH * 0.25f - halfTileSize)
-			m_camPos.x = 0 + SCR_WIDTH * 0.25f - halfTileSize;
+		if (m_camPos.x < 0.0f + SCR_WIDTH * 0.25f - halfTileSize)
+			m_camPos.x = 0.0f + SCR_WIDTH * 0.25f - halfTileSize;
 		if (m_camPos.x > m_map->getMapWidthPx() - SCR_WIDTH * 1.25f - halfTileSize)
 			m_camPos.x = m_map->getMapWidthPx() - SCR_WIDTH * 1.25f - halfTileSize;
-		if (m_camPos.y < 0 + SCR_HEIGHT * 0.25f + halfTileSize)
-			m_camPos.y = 0 + SCR_HEIGHT * 0.25f + halfTileSize;
+		if (m_camPos.y < 0.0f + SCR_HEIGHT * 0.25f + halfTileSize)
+			m_camPos.y = 0.0f + SCR_HEIGHT * 0.25f + halfTileSize;
 		if (m_camPos.y > m_map->getMapHeightPx() - SCR_HEIGHT * 1.25f + halfTileSize)
 			m_camPos.y = m_map->getMapHeightPx() - SCR_HEIGHT * 1.25f + halfTileSize;
 		break;

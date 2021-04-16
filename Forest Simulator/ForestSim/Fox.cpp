@@ -1,9 +1,10 @@
 #include "Fox.h"
+#include "Bunny.h"
 #include "Map.h"
 #include "Life.h"
 #include <glm/gtx/norm.hpp>
 
-void Fox::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
+void Fox::onDraw(aie::Renderer2D* renderer)
 {
 	renderer->setRenderColour(1, 0, 0, 1);
 	renderer->drawCircle(getPosition().x, getPosition().y, 15);
@@ -38,7 +39,7 @@ void Fox::initMovementValues()
 {
 	m_maxVelocity = 600;
 	m_maxForce = 100;
-	m_visionRange = 9;
+	m_visionRange = 25;
 	m_maxAvoidForce = 600;
 	m_matureAge = 0.3f;
 	m_respawnDelay = 40;
@@ -113,10 +114,16 @@ Node* Fox::getNearestFood()
 	if (getMap()->getBunnies().begin() == getMap()->getBunnies().end())
 		return nullptr;
 
+	std::vector<GameObject*> nearestList;
+	Quadtree* objTree = getMap()->getBunnyTree();
+	objTree->query(getPosition(), 999999, nearestList);
+
 	Agent* closestPrey = nullptr;
 
-	for (auto& prey : getMap()->getBunnies())
+	for (auto& obj : nearestList)
 	{
+		Bunny* prey = dynamic_cast<Bunny*>(obj);
+
 		// skip if inactive
 		if (!prey->isActive())
 			continue;
@@ -145,10 +152,16 @@ Node* Fox::getNearestMate()
 	if (getMap()->getFoxes().begin() == getMap()->getFoxes().end())
 		return nullptr;
 
+	std::vector<GameObject*> nearestList;
+	Quadtree* objTree = getMap()->getFoxTree();
+	objTree->query(getPosition(), 999999, nearestList);
+
 	Agent* closestMate = nullptr;
 
-	for (auto& fox : getMap()->getFoxes())
+	for (auto& obj : nearestList)
 	{
+		Fox* fox = dynamic_cast<Fox*>(obj);
+
 		// skip if inactive
 		if (!fox->isActive())
 			continue;

@@ -4,10 +4,10 @@
 
 IBehaviour::Result SpawnBehaviour::update(Agent* agent, float deltaTime)
 {
-	if (agent->getTargetAgent() == nullptr)
+	if (agent->m_targetAgent == nullptr)
 		return Result::FAILURE;
 
-	if (!agent->getTargetAgent()->isActive())
+	if (!agent->m_targetAgent->isActive())
 		return Result::FAILURE;
 
 	agent->setVelocity(glm::vec2(0, 0));

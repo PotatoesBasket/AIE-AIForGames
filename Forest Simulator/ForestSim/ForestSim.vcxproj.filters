@@ -10,9 +10,6 @@
     <Filter Include="Math">
       <UniqueIdentifier>{3bb1ad78-78eb-4a43-bd3c-ff99d9977e5c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{a36461f7-a648-48c7-92dc-50648f8457eb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects">
       <UniqueIdentifier>{99d10c80-a8ab-4318-99f5-9a150a528b66}</UniqueIdentifier>
     </Filter>
@@ -46,6 +43,15 @@
     <Filter Include="Behaviours\Actions\Steering\Forces">
       <UniqueIdentifier>{4270aad6-a7ac-4ba5-ba91-df04600762cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\Agents">
+      <UniqueIdentifier>{7c7fd9bb-8944-40da-820b-b15d3252ce11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Components">
+      <UniqueIdentifier>{a36461f7-a648-48c7-92dc-50648f8457eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviours\Actions\Life">
+      <UniqueIdentifier>{f9e3eed4-2223-4076-8286-69d873feebda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ForestSimApp.cpp">
@@ -64,13 +70,13 @@
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Components</Filter>
+      <Filter>Objects\Components</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedSprite.cpp">
-      <Filter>Components</Filter>
+      <Filter>Objects\Components</Filter>
     </ClCompile>
     <ClCompile Include="Composite.cpp">
       <Filter>Behaviours\Base</Filter>
@@ -87,14 +93,8 @@
     <ClCompile Include="Pathfinding.cpp">
       <Filter>Pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="Bunny.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="WanderSteering.cpp">
       <Filter>Behaviours\Actions\Steering\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="Agent.cpp">
-      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="AvoidSteering.cpp">
       <Filter>Behaviours\Actions\Steering\Forces</Filter>
@@ -115,10 +115,7 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Life.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Fox.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Components</Filter>
     </ClCompile>
     <ClCompile Include="HungerCondition.cpp">
       <Filter>Behaviours\Conditions</Filter>
@@ -129,20 +126,32 @@
     <ClCompile Include="EnergyCondition.cpp">
       <Filter>Behaviours\Conditions</Filter>
     </ClCompile>
-    <ClCompile Include="EatBehaviour.cpp">
-      <Filter>Behaviours\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepBehaviour.cpp">
-      <Filter>Behaviours\Actions</Filter>
-    </ClCompile>
     <ClCompile Include="MateCondition.cpp">
       <Filter>Behaviours\Conditions</Filter>
     </ClCompile>
-    <ClCompile Include="SpawnBehaviour.cpp">
-      <Filter>Behaviours\Actions</Filter>
-    </ClCompile>
     <ClCompile Include="AgentPool.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Objects\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="Bunny.cpp">
+      <Filter>Objects\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="Fox.cpp">
+      <Filter>Objects\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="Quadtree.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="EatBehaviour.cpp">
+      <Filter>Behaviours\Actions\Life</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepBehaviour.cpp">
+      <Filter>Behaviours\Actions\Life</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnBehaviour.cpp">
+      <Filter>Behaviours\Actions\Life</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,20 +170,17 @@
     <ClInclude Include="GameObject.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Stat.h">
-      <Filter>Data</Filter>
-    </ClInclude>
     <ClInclude Include="RNG.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Components</Filter>
+      <Filter>Objects\Components</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedSprite.h">
-      <Filter>Components</Filter>
+      <Filter>Objects\Components</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Objects</Filter>
@@ -218,14 +224,8 @@
     <ClInclude Include="ColourDefines.h">
       <Filter>Data</Filter>
     </ClInclude>
-    <ClInclude Include="Bunny.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="WanderSteering.h">
       <Filter>Behaviours\Actions\Steering\Forces</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent.h">
-      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="AvoidSteering.h">
       <Filter>Behaviours\Actions\Steering\Forces</Filter>
@@ -249,31 +249,40 @@
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="Life.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Fox.h">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Components</Filter>
     </ClInclude>
     <ClInclude Include="ISteering.h">
       <Filter>Behaviours\Actions\Steering\Forces</Filter>
     </ClInclude>
-    <ClInclude Include="EatBehaviour.h">
-      <Filter>Behaviours\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="SleepBehaviour.h">
-      <Filter>Behaviours\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Conditions.h">
       <Filter>Behaviours\Conditions</Filter>
-    </ClInclude>
-    <ClInclude Include="SpawnBehaviour.h">
-      <Filter>Behaviours\Actions</Filter>
     </ClInclude>
     <ClInclude Include="AnimationSheets.h">
       <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="AgentPool.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Objects\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="Bunny.h">
+      <Filter>Objects\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="Fox.h">
+      <Filter>Objects\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="Quadtree.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="EatBehaviour.h">
+      <Filter>Behaviours\Actions\Life</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepBehaviour.h">
+      <Filter>Behaviours\Actions\Life</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnBehaviour.h">
+      <Filter>Behaviours\Actions\Life</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

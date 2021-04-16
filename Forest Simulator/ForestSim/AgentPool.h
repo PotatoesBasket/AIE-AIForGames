@@ -11,7 +11,7 @@ public:
 	std::vector<Agent*>& getAgentList() { return m_agentList; }
 
 	void update(float deltaTime);
-	void draw(std::shared_ptr<aie::Renderer2D> renderer);
+	void draw(aie::Renderer2D* renderer);
 
 private:
 	std::vector<Agent*> m_agentList;

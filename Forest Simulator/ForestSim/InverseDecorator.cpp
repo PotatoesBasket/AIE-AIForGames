@@ -6,13 +6,13 @@ IBehaviour::Result InverseDecorator::update(Agent* agent, float deltaTime)
 
 	switch (result)
 	{
-	case IBehaviour::FAILURE:
-		return SUCCESS;
+	case IBehaviour::Result::FAILURE:
+		return Result::SUCCESS;
 
-	case IBehaviour::SUCCESS:
-		return FAILURE;
+	case IBehaviour::Result::SUCCESS:
+		return Result::FAILURE;
 
 	default:
-		return INVALID;
+		return Result::INVALID;
 	}
 }

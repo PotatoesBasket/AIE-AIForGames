@@ -14,7 +14,7 @@ public:
 	void loadSprite(SpriteInfo sheet);
 
 private:
-	void draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> renderer) override;
+	void draw(GameObject* parent, aie::Renderer2D* renderer) override;
 
 protected:
 	std::shared_ptr<ResourceBase> m_texture = nullptr;

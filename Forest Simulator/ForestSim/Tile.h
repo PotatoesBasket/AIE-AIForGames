@@ -7,7 +7,7 @@ class Sprite;
 class Tile : public Node
 {
 public:
-	enum Type
+	enum class Type
 	{
 		ground,
 		water,

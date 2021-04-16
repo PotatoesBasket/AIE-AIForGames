@@ -193,6 +193,7 @@
     <ClCompile Include="MateCondition.cpp" />
     <ClCompile Include="NewPathBehaviour.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="AnimatedSprite.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="ISteering.h" />
     <ClInclude Include="NewPathBehaviour.h" />
     <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="Quadtree.h" />
     <ClInclude Include="ScreenDefines.h" />
     <ClInclude Include="SeekSteering.h" />
     <ClInclude Include="Selector.h" />
@@ -239,7 +241,6 @@
     <ClInclude Include="SpawnBehaviour.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteInfo.h" />
-    <ClInclude Include="Stat.h" />
     <ClInclude Include="RNG.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />

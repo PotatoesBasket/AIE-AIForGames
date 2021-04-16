@@ -20,7 +20,7 @@ void Sprite::loadSprite(SpriteInfo sheet)
 	m_yPos = m_percentHeight * sheet.rowPos;
 }
 
-void Sprite::draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> renderer)
+void Sprite::draw(GameObject* parent, aie::Renderer2D* renderer)
 {
 	renderer->setUVRect(m_xPos, m_yPos, m_percentWidth, m_percentHeight);
 

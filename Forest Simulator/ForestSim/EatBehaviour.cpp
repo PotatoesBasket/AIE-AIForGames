@@ -5,23 +5,23 @@
 IBehaviour::Result EatBehaviour::update(Agent* agent, float deltaTime)
 {
 	// if agent is eating another agent, set that one inactive and reset target
-	if (agent->getTargetAgent() != nullptr)
+	if (agent->m_targetAgent != nullptr)
 	{
 		// recheck agent is still active
-		if (!agent->getTargetAgent()->isActive())
-			return FAILURE;
-		agent->getTargetAgent()->setActiveState(false);
-		agent->setTargetAgent(nullptr);
+		if (!agent->m_targetAgent->isActive())
+			return Result::FAILURE;
+		agent->m_targetAgent->setActiveState(false);
+		agent->m_targetAgent = nullptr;
 	}
 
 	// if agent is eating grass, reduce its HP and reset target
-	if (agent->getTargetGrass() != nullptr)
+	if (agent->m_targetGrass != nullptr)
 	{
 		// recheck grass is still there
-		if (!agent->getTargetGrass()->isEdible())
-			return FAILURE;
-		agent->getTargetGrass()->reduceHP();
-		agent->setTargetGrass(nullptr);
+		if (!agent->m_targetGrass->isEdible())
+			return Result::FAILURE;
+		agent->m_targetGrass->reduceHP();
+		agent->m_targetGrass = nullptr;
 	}
 
 	// keep agent still and reduce hunger to 0

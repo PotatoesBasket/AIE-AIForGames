@@ -21,7 +21,7 @@ void AnimatedSprite::update(GameObject* parent, float deltaTime)
 	m_timer += deltaTime;
 }
 
-void AnimatedSprite::draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> renderer)
+void AnimatedSprite::draw(GameObject* parent, aie::Renderer2D* renderer)
 {
 	updateUVRect(renderer);
 
@@ -31,7 +31,7 @@ void AnimatedSprite::draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> r
 	renderer->setUVRect(1, 1, 1, 1); //reset UV
 }
 
-void AnimatedSprite::updateUVRect(std::shared_ptr<aie::Renderer2D> renderer)
+void AnimatedSprite::updateUVRect(aie::Renderer2D* renderer)
 {
 	//get size of single frame as percentage of total spritesheet
 	float width = 1.0f / m_columnCount;

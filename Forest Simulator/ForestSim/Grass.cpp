@@ -33,10 +33,10 @@ void Grass::onUpdate(float deltaTime)
 	{
 		m_timer += deltaTime;
 
-		if (m_timer >= m_growthRate)
+		while (m_timer >= m_growthRate)
 		{
 			++m_hp;
-			m_timer = 0;
+			m_timer -= m_growthRate;
 			updateSprite();
 		}
 	}

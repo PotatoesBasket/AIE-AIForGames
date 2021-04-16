@@ -20,7 +20,7 @@ public:
 	Bunny(glm::vec2 position) { init(); setPosition(position); }
 	virtual ~Bunny() {}
 
-	void onDraw(std::shared_ptr<aie::Renderer2D> renderer) override;
+	void onDraw(aie::Renderer2D* renderer) override;
 
 	void init();
 	void initMovementValues();

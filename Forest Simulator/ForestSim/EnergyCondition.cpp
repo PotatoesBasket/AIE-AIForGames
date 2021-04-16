@@ -8,13 +8,13 @@
 IBehaviour::Result EnergyCondition::update(Agent* agent, float deltaTime)
 {
 	if (agent->getSleepState() == false &&
-		agent->getStats()->getEnergy().getCurrentPercent() >= criticalLevel)
+		agent->getStats()->getEnergy().currentPercent >= criticalLevel)
 	{
 		agent->setSleepState(true);
 		return Result::SUCCESS;
 	}
 	else if (agent->getSleepState() == true &&
-		agent->getStats()->getEnergy().getCurrentPercent() > 0)
+		agent->getStats()->getEnergy().currentPercent > 0)
 		return Result::SUCCESS;
 
 	agent->setSleepState(false);

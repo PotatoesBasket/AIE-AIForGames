@@ -29,7 +29,7 @@ glm::vec2 AvoidSteering::getForce(Agent* agent) const
 		//	return force;
 		//}
 
-		if (obstacle->isInsideBox(ahead) || obstacle->isInsideBox(halfAhead))
+		if (obstacle->containsPoint(ahead) || obstacle->containsPoint(halfAhead))
 		{
 			if (closestObstacle == nullptr)
 				closestObstacle = obstacle.get();

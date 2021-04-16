@@ -5,7 +5,7 @@
 IBehaviour::Result FollowPathBehaviour::update(Agent* agent, float deltaTime)
 {
 	if (agent->getPath().empty())
-		return SUCCESS;
+		return Result::SUCCESS;
 
 	// get position of next node in path
 	glm::vec2 target = agent->getPath().front()->position;
@@ -23,7 +23,7 @@ IBehaviour::Result FollowPathBehaviour::update(Agent* agent, float deltaTime)
 		glm::vec2 force = velocity - agent->getVelocity();
 
 		agent->addForce(force * deltaTime);
-		return ONGOING;
+		return Result::ONGOING;
 	}
 	else
 	{
@@ -32,8 +32,8 @@ IBehaviour::Result FollowPathBehaviour::update(Agent* agent, float deltaTime)
 		
 		// if agent has reached target node, return success
 		if (agent->getPath().empty())
-			return SUCCESS;
+			return Result::SUCCESS;
 	}
 
-	return FAILURE;
+	return Result::FAILURE;
 }

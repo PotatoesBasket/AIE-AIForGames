@@ -3,7 +3,7 @@
 
 IBehaviour::Result MateCondition::update(Agent* agent, float deltaTime)
 {
-	if (agent->getStats()->getAge().getCurrentPercent() > agent->getMatureAge() && agent->canSpawn())
+	if (agent->getStats()->getAge().currentPercent > agent->getMatureAge() && agent->canSpawn())
 	{
 		Node* mate = agent->getNearestMate();
 
@@ -13,12 +13,12 @@ IBehaviour::Result MateCondition::update(Agent* agent, float deltaTime)
 		}
 		else
 		{
-			agent->setTargetNode(mate);
+			agent->m_targetNode = mate;
 			return Result::SUCCESS;
 		}
 	}
 
-	agent->setTargetGrass(nullptr);
-	agent->setTargetNode(nullptr);
+	agent->m_targetGrass = nullptr;
+	agent->m_targetNode = nullptr;
 	return Result::FAILURE;
 }

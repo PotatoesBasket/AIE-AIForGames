@@ -1,0 +1,121 @@
+﻿  Agent.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  AgentPool.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\NewPathBehaviour.h(5,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10): message : see declaration of 'Node'
+  AvoidSteering.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  AABB.cpp
+  Bunny.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\NewPathBehaviour.h(5,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10): message : see declaration of 'Node'
+  Composite.cpp
+  DangerCondition.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  EatBehaviour.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  EnergyCondition.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  FleeSteering.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  FollowPathBehaviour.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  ForestSimApp.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\NewPathBehaviour.h(5,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\ForestSimApp.cpp(11,23): warning C4311: 'type cast': pointer truncation from 'time_t (__cdecl *)(time_t *const )' to 'int'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\ForestSimApp.cpp(11,23): warning C4302: 'type cast': truncation from 'time_t (__cdecl *)(time_t *const )' to 'int'
+  Fox.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\NewPathBehaviour.h(5,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10): message : see declaration of 'Node'
+  GameObject.cpp
+  Grass.cpp
+  HungerCondition.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  InverseDecorator.cpp
+  Life.cpp
+  main.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\NewPathBehaviour.h(5,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10): message : see declaration of 'Node'
+  Map.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\NewPathBehaviour.h(5,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(81,52): warning C4244: 'argument': conversion from 'const unsigned int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(81,40): warning C4244: 'argument': conversion from 'const unsigned int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(115,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(130,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(131,8): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(174,42): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(174,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(184,42): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Map.cpp(184,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Compiling...
+  MateCondition.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  NewPathBehaviour.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(6,12): warning C4099: 'Node': type name first seen using 'class' now seen using 'struct'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\NewPathBehaviour.h(5): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(21,1): warning C4099: 'Node': type name first seen using 'class' now seen using 'struct'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  Pathfinding.cpp
+  RNG.cpp
+  ResourceManager.cpp
+  AnimatedSprite.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\AnimatedSprite.cpp(29,53): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\AnimatedSprite.cpp(29,38): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  SeekSteering.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  SleepBehaviour.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  SpawnBehaviour.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  Sprite.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Sprite.cpp(13,13): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Sprite.cpp(14,13): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Sprite.cpp(28,53): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Sprite.cpp(28,38): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  SteeringBehaviour.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  WanderSteering.cpp
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Agent.h(10,11): warning C4099: 'Node': type name first seen using 'struct' now seen using 'class'
+C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\ForestSim\Graph.h(20): message : see declaration of 'Node'
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 2865 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  ForestSim.vcxproj -> C:\Users\Faint\Faint\Work\Forest Simulator\Forest Simulator\temp\ForestSim\x64\Release\ForestSim.exe

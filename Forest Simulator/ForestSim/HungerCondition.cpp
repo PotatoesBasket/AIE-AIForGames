@@ -3,7 +3,7 @@
 
 IBehaviour::Result HungerCondition::update(Agent* agent, float deltaTime)
 {
-	if (agent->getStats()->getHunger().getCurrentPercent() > criticalLevel)
+	if (agent->getStats()->getHunger().currentPercent > criticalLevel)
 	{
 		Node* food = agent->getNearestFood();
 
@@ -13,12 +13,12 @@ IBehaviour::Result HungerCondition::update(Agent* agent, float deltaTime)
 		}
 		else
 		{
-			agent->setTargetNode(food);
+			agent->m_targetNode = food;
 			return Result::SUCCESS;
 		}
 	}
 
-	agent->setTargetGrass(nullptr);
-	agent->setTargetNode(nullptr);
+	agent->m_targetGrass = nullptr;
+	agent->m_targetNode = nullptr;
 	return Result::FAILURE;
 }

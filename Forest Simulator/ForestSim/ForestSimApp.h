@@ -9,7 +9,7 @@ class ForestSimApp : public aie::Application
 {
 public:
 	ForestSimApp() {}
-	virtual ~ForestSimApp() { delete m_map; }
+	virtual ~ForestSimApp() {}
 
 	virtual bool startup();
 	virtual void shutdown() {}
@@ -21,14 +21,18 @@ private:
 	void initCamera();
 	void camControls(float deltaTime);
 
-protected:
-	std::shared_ptr<aie::Renderer2D> m_2dRenderer = nullptr;
-	Map* m_map = nullptr;
+	float cappedDeltaTime(float deltaTime) { return deltaTime < m_deltaLimit ? deltaTime : m_deltaLimit; }
 
-	glm::vec2 m_camPos;
-	float m_currentPanSpeed = 0;
-	const float m_panSpeed = 400;
-	const float m_fastPanSpeed = 1000;
+protected:
+	std::unique_ptr<aie::Renderer2D> m_2dRenderer = nullptr;
+	std::unique_ptr<Map> m_map = nullptr;
+
+	float m_deltaLimit = 0.3f;
+
+	glm::vec2 m_camPos = glm::vec2(0.0f);
+	float m_currentPanSpeed = 0.0f;
+	const float m_panSpeed = 400.0f;
+	const float m_fastPanSpeed = 1000.0f;
 	unsigned int m_zoomLevel = 1;
 
 	bool m_zoomInputPressed = false;

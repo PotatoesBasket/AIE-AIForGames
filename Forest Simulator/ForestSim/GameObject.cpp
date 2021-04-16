@@ -17,7 +17,7 @@ void GameObject::update(float deltaTime)
 }
 
 /*If object is alive, draw the object itself, then its components (if active), then its children.*/
-void GameObject::draw(std::shared_ptr<aie::Renderer2D> renderer)
+void GameObject::draw(aie::Renderer2D* renderer)
 {
 	if (m_active)
 	{

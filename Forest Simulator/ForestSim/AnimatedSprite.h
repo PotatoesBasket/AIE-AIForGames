@@ -15,10 +15,10 @@ public:
 
 private:
 	void update(GameObject* parent, float deltaTime) override;
-	void draw(GameObject* parent, std::shared_ptr<aie::Renderer2D> renderer) override;
+	void draw(GameObject* parent, aie::Renderer2D* renderer) override;
 
 	//update current portion of spritesheet being renderered
-	void updateUVRect(std::shared_ptr<aie::Renderer2D> renderer);
+	void updateUVRect(aie::Renderer2D* renderer);
 
 protected:
 	std::shared_ptr<ResourceBase> m_texture = nullptr;

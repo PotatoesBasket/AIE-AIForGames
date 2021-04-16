@@ -4,7 +4,7 @@
 #include "Grass.h"
 #include <glm/gtx/norm.hpp>
 
-void Bunny::onDraw(std::shared_ptr<aie::Renderer2D> renderer)
+void Bunny::onDraw(aie::Renderer2D* renderer)
 {
 	renderer->setRenderColour(0, 0, 1, 1);
 	renderer->drawCircle(getPosition().x, getPosition().y, 10);
@@ -39,7 +39,7 @@ void Bunny::initMovementValues()
 {
 	m_maxVelocity = 400;
 	m_maxForce = 100;
-	m_visionRange = 8;
+	m_visionRange = 18;
 	m_maxAvoidForce = 500;
 	m_matureAge = 0.05f;
 	m_respawnDelay = 20;
@@ -129,20 +129,26 @@ Node* Bunny::getNearestFood()
 	if (getMap()->getGrass().begin() == getMap()->getGrass().end())
 		return nullptr;
 
+	std::vector<GameObject*> nearestGrassList;
+	Quadtree* grassTree = getMap()->getGrassTree();
+	grassTree->query(getPosition(), 9999999, nearestGrassList);
+
 	Grass* closestGrass = nullptr;
 
-	for (auto& grass : getMap()->getGrass())
+	for (auto& g : nearestGrassList)
 	{
+		Grass* grass = dynamic_cast<Grass*>(g);
+
 		// skip if inactive
 		if (!grass->isEdible())
 			continue;
 
 		// if no closest is set yet, set it and skip comparison
 		if (closestGrass == nullptr)
-			closestGrass = grass.get();
+			closestGrass = grass;
 		// otherwise, compare with current closest
 		else if (glm::length2(grass->getPosition() - getPosition()) < glm::length2(closestGrass->getPosition() - getPosition()))
-			closestGrass = grass.get();
+			closestGrass = grass;
 	}
 
 	// check grass was found, return node grass is on
@@ -161,10 +167,16 @@ Node* Bunny::getNearestMate()
 	if (getMap()->getBunnies().begin() == getMap()->getBunnies().end())
 		return nullptr;
 
+	std::vector<GameObject*> nearestList;
+	Quadtree* objTree = getMap()->getBunnyTree();
+	objTree->query(getPosition(), 9999999, nearestList);
+
 	Agent* closestMate = nullptr;
 
-	for (auto& bunny : getMap()->getBunnies())
+	for (auto& obj : nearestList)
 	{
+		Bunny* bunny = dynamic_cast<Bunny*>(obj);
+
 		// skip if inactive
 		if (!bunny->isActive())
 			continue;

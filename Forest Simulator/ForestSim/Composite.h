@@ -15,7 +15,7 @@ public:
 	void reset() { m_currentChild = m_children.begin(); }
 
 protected:
-	Result m_continueResult = INVALID;
+	Result m_continueResult = Result::INVALID;
 	std::vector<IBehaviour*> m_children;
 	std::vector<IBehaviour*>::iterator m_currentChild = m_children.begin();
 };

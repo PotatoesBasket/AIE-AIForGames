@@ -5,7 +5,7 @@ glm::vec2 FleeSteering::getForce(Agent* agent) const
 {
 	glm::vec2 force = glm::vec2(0, 0);
 	glm::vec2 velocity = glm::vec2(0, 0);
-	Agent* target = agent->getTargetAgent();
+	Agent* target = agent->m_targetAgent;
 
 	if (!target)
 		return force;

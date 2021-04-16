@@ -7,7 +7,7 @@ class Agent;
 class IBehaviour
 {
 public:
-	enum Result
+	enum class Result
 	{
 		INVALID,
 		FAILURE,
@@ -18,5 +18,5 @@ public:
 	virtual Result update(Agent* agent, float deltaTime) = 0;
 
 protected:
-	Result m_result = INVALID;
+	Result m_result = Result::INVALID;
 };

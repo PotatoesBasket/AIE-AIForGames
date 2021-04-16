@@ -5,10 +5,14 @@
 
 IBehaviour::Result DangerCondition::update(Agent* agent, float deltaTime)
 {
+	std::vector<GameObject*> nearestFoxList;
+	Quadtree* foxTree = agent->getMap()->getFoxTree();
+	foxTree->query(agent->getPosition(), fleeRange, nearestFoxList);
+
 	Agent* closestPredator = nullptr;
 
 	// find closest predator
-	for (auto& predator : agent->getMap()->getFoxes())
+	for (auto& predator : nearestFoxList)
 	{
 		// skip if inactive
 		if (!predator->isActive())
@@ -16,21 +20,22 @@ IBehaviour::Result DangerCondition::update(Agent* agent, float deltaTime)
 
 		// if no closest is set yet, set it and skip comparison
 		if (closestPredator == nullptr)
-			closestPredator = predator;
+			closestPredator = dynamic_cast<Agent*>(predator);
 		// otherwise, compare with current closest
 		else if (glm::length2(predator->getPosition() - agent->getPosition()) <
 			glm::length2(closestPredator->getPosition() - agent->getPosition()))
-			closestPredator = predator;
+			closestPredator = dynamic_cast<Agent*>(predator);
 	}
 
 	// check if predator is close enough to flee from
+	// probably redundant since adding quadtrees, check later
 	if (closestPredator != nullptr &&
 		glm::length2(closestPredator->getPosition() - agent->getPosition()) < fleeRange * fleeRange)
 	{
-		agent->setTargetAgent(closestPredator);
+		agent->m_targetAgent = closestPredator;
 		return Result::SUCCESS;
 	}
 
-	agent->setTargetAgent(nullptr);
+	agent->m_targetAgent = nullptr;
 	return Result::FAILURE;
 }

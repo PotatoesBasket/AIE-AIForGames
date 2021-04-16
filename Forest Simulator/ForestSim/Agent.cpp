@@ -22,13 +22,31 @@ void Agent::update(float deltaTime)
 		setPosition(getPosition() + m_velocity * deltaTime);
 
 		//update components
-		for (auto component : m_components)
+		for (auto& component : m_components)
 			if (component->isActive())
 				component->update(this, deltaTime);
 
 		//update children
-		for (auto child : m_children)
+		for (auto& child : m_children)
 			child->update(deltaTime);
+	}
+}
+
+void Agent::draw(aie::Renderer2D* renderer)
+{
+	if (m_active)
+	{
+		//renderer->setRenderColour(1.0f, 0.0f, 1.0f, 1.0f);
+		//renderer->drawCircle(getPosition().x, getPosition().y, m_visionRange);
+
+		onDraw(renderer);
+
+		for (auto component : m_components)
+			if (component->isActive())
+				component->draw(this, renderer);
+
+		for (auto child : m_children)
+			child->draw(renderer);
 	}
 }
 
@@ -45,6 +63,6 @@ void Agent::updateBehaviours()
 		for (auto& behaviour : m_behaviourList)
 			behaviour->update(this, m_bhDelay); // cap deltaTime at delay rate
 
-		m_bhTimer = 0;
+		m_bhTimer = 0; //won't recalculate on lag spikes
 	}
 }

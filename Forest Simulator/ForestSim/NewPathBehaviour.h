@@ -2,7 +2,7 @@
 #include "IBehaviour.h"
 
 class Agent;
-class Node;
+struct Node;
 
 // finds a path from Agent's position to target using A*
 class NewPathBehaviour : public IBehaviour

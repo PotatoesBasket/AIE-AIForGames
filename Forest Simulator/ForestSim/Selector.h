@@ -5,6 +5,6 @@
 class Selector : public Composite
 {
 public:
-	Selector() { m_continueResult = FAILURE; }
+	Selector() { m_continueResult = Result::FAILURE; }
 	~Selector() {}
 };
