@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "Life.h"
 #include <glm/gtx/norm.hpp>
+#include "DebugManager.h"
 
 void Fox::onDraw(aie::Renderer2D* renderer)
 {
@@ -10,20 +11,21 @@ void Fox::onDraw(aie::Renderer2D* renderer)
 	renderer->drawCircle(getPosition().x, getPosition().y, 15);
 	renderer->setRenderColour(1, 1, 1, 1);
 
-#ifndef NDEBUG
-	// draw velocity vector
-	renderer->setRenderColour(0, 0, 1, 1);
-	renderer->drawLine(getPosition().x, getPosition().y,
-		getPosition().x + m_velocity.x, getPosition().y + m_velocity.y, 2);
+	if (DebugManager::current().showPaths == true)
+	{
+		// draw velocity vector
+		renderer->setRenderColour(0, 0, 1, 1);
+		renderer->drawLine(getPosition().x, getPosition().y,
+			getPosition().x + m_velocity.x, getPosition().y + m_velocity.y, 2);
 
-	//draw path of nodes
-	renderer->setRenderColour(1, 1, 0, 1);
-	if (m_path.size() > 0)
-		for (auto& node : m_path)
-			renderer->drawCircle(node->position.x, node->position.y, 5);
+		//draw path of nodes
+		renderer->setRenderColour(1, 1, 0, 1);
+		if (m_path.size() > 0)
+			for (auto& node : m_path)
+				renderer->drawCircle(node->position.x, node->position.y, 5);
+	}
 
 	renderer->setRenderColour(1, 1, 1, 1);
-#endif
 }
 
 void Fox::init()

@@ -1,6 +1,7 @@
 #include "FollowPathBehaviour.h"
 #include "Agent.h"
 #include "Grass.h"
+#include "DebugManager.h"
 
 IBehaviour::Result FollowPathBehaviour::update(Agent* agent, float deltaTime)
 {
@@ -23,6 +24,7 @@ IBehaviour::Result FollowPathBehaviour::update(Agent* agent, float deltaTime)
 		glm::vec2 force = velocity - agent->getVelocity();
 
 		agent->addForce(force * deltaTime);
+		DebugManager::current().noOfFollowingPath++;
 		return Result::ONGOING;
 	}
 	else

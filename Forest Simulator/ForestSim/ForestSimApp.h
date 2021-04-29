@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "Bunny.h"
 #include "Fox.h"
+#include "DebugManager.h"
 
 class ForestSimApp : public aie::Application
 {
@@ -26,6 +27,7 @@ private:
 protected:
 	std::unique_ptr<aie::Renderer2D> m_2dRenderer = nullptr;
 	std::unique_ptr<Map> m_map = nullptr;
+	DebugManager& m_debug = DebugManager::current();
 
 	float m_deltaLimit = 0.3f;
 

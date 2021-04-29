@@ -3,7 +3,7 @@
 
 IBehaviour::Result HungerCondition::update(Agent* agent, float deltaTime)
 {
-	if (agent->getStats()->getHunger().currentPercent > criticalLevel)
+	if (agent->getStats()->getHunger()->currentPercent > criticalLevel)
 	{
 		Node* food = agent->getNearestFood();
 

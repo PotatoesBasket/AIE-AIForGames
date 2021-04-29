@@ -7,6 +7,7 @@
 #include "Bunny.h"
 #include "Fox.h"
 #include <fstream>
+#include "DebugManager.h"
 
 Map::Map()
 {
@@ -86,23 +87,26 @@ void Map::onDraw(aie::Renderer2D* renderer)
 	}
 	renderer->setUVRect(1, 1, 1, 1);
 
-	//// draw node connections
-	//renderer->setRenderColour(1, 0, 0, 1);
-	//for (auto& tile : m_tiles)
-	//{
-	//	for (auto& edge : tile->outgoingEdges)
-	//	{
-	//		renderer->drawLine(tile->getPosition().x, tile->getPosition().y,
-	//			edge.targetNode->position.x, edge.targetNode->position.y);
-	//	}
-	//}
-	//renderer->setRenderColour(1, 1, 1, 1);
+	if (DebugManager::current().showNodes == true)
+	{
+		// draw node connections
+		renderer->setRenderColour(1, 0, 0, 1);
+		for (auto& tile : m_tiles)
+		{
+			for (auto& edge : tile->outgoingEdges)
+			{
+				renderer->drawLine(tile->getPosition().x, tile->getPosition().y,
+					edge.targetNode->position.x, edge.targetNode->position.y);
+			}
+		}
+		renderer->setRenderColour(1, 1, 1, 1);
 
-	//// draw obstacle AABBs
-	//for (auto& obstacle : m_obstacles)
-	//{
-	//	obstacle->draw(renderer);
-	//}
+		// draw obstacle AABBs
+		for (auto& obstacle : m_obstacles)
+		{
+			obstacle->draw(renderer);
+		}
+	}
 
 	for (auto& grass : m_grassPatches)
 		grass->draw(renderer);

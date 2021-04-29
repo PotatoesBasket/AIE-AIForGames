@@ -14,7 +14,7 @@ public:
 	~Stat() {}
 
 	void update(float deltaTime);
-	void reset() { m_timer = 0.0f; m_current = 0.0f; }
+	void reset() { m_timer = 0.0f; currentPercent = 0.0f; }
 	void setIncrementPercent(float value) { m_inc = value; }
 
 public:
@@ -22,7 +22,6 @@ public:
 
 private:
 	float m_timer = 0.0f;
-	float m_current = 0.0f;
 	float m_inc = 0.0f;
 };
 
@@ -38,12 +37,12 @@ public:
 
 	void reset();
 
-	Stat& getAge() { return m_age; }
-	Stat& getHunger() { return m_hunger; }
-	Stat& getEnergy() { return m_energy; }
+	Stat* getAge() { return m_age.get(); }
+	Stat* getHunger() { return m_hunger.get(); }
+	Stat* getEnergy() { return m_energy.get(); }
 
 private:
-	Stat m_age;
-	Stat m_hunger;
-	Stat m_energy;
+	std::unique_ptr<Stat> m_age;
+	std::unique_ptr<Stat> m_hunger;
+	std::unique_ptr<Stat> m_energy;
 };

@@ -14,11 +14,7 @@ private:
 public:
 	~ResourceManager() {}
 
-	static ResourceManager& getInstance()
-	{
-		static ResourceManager instance;
-		return instance;
-	}
+	static ResourceManager& getInstance();
 
 	size_t getCount() const { return m_resources.size(); }
 

@@ -177,6 +177,7 @@
     <ClCompile Include="Bunny.cpp" />
     <ClCompile Include="Composite.cpp" />
     <ClCompile Include="DangerCondition.cpp" />
+    <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="EatBehaviour.cpp" />
     <ClCompile Include="EnergyCondition.cpp" />
     <ClCompile Include="FleeSteering.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="ColourDefines.h" />
     <ClInclude Include="Composite.h" />
     <ClInclude Include="Conditions.h" />
+    <ClInclude Include="DebugManager.h" />
     <ClInclude Include="Decorator.h" />
     <ClInclude Include="EatBehaviour.h" />
     <ClInclude Include="Fox.h" />

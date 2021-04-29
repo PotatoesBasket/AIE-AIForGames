@@ -3,6 +3,8 @@
 #include "Map.h"
 #include <glm/gtx/norm.hpp>
 #include <glm/geometric.hpp>
+#include <chrono>
+#include "DebugManager.h"
 
 void Agent::update(float deltaTime)
 {
@@ -60,9 +62,19 @@ void Agent::updateBehaviours()
 	//behaviours don't need to be updated every frame
 	if (m_bhTimer > m_bhDelay)
 	{
+		//
+		auto t1 = std::chrono::high_resolution_clock::now();
+		//
+
 		for (auto& behaviour : m_behaviourList)
 			behaviour->update(this, m_bhDelay); // cap deltaTime at delay rate
 
 		m_bhTimer = 0; //won't recalculate on lag spikes
+
+		//
+		auto t2 = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double, std::milli> t = t2 - t1;
+		DebugManager::current().totalFuncTimeBehaviour += t.count();
+		//
 	}
 }

@@ -1,5 +1,6 @@
 #include "Quadtree.h"
 #include "GameObject.h"
+#include "DebugManager.h"
 
 bool Quadtree::insert(GameObject* agent)
 {
@@ -110,21 +111,23 @@ void Quadtree::query(const glm::vec2& circleCenter, float circleRadius, std::vec
 
 void Quadtree::draw(aie::Renderer2D* renderer)
 {
-	//ew
-	glm::vec2 min = glm::vec2(m_boundary.center().x - m_boundary.width() * 0.5f, m_boundary.center().y - m_boundary.height() * 0.5f);
-	glm::vec2 max = glm::vec2(m_boundary.center().x + m_boundary.width() * 0.5f, m_boundary.center().y + m_boundary.height() * 0.5f);
-
-	renderer->setRenderColour(0.0f, 0.0f, 0.0f, 1.0f);
-	renderer->drawLine(min.x, min.y, max.x, min.y, 3, 0); //bottom
-	renderer->drawLine(max.x, min.y, max.x, max.y, 3, 0); //right
-	renderer->drawLine(max.x, max.y, min.x, max.y, 3, 0); //top
-	renderer->drawLine(min.x, max.y, min.x, min.y, 3, 0); //left
-
-	if (m_divided)
+	if (DebugManager::current().showQuadtree == true)
 	{
-		NW->draw(renderer);
-		NE->draw(renderer);
-		SW->draw(renderer);
-		SE->draw(renderer);
+		glm::vec2 min = glm::vec2(m_boundary.center().x - m_boundary.width() * 0.5f, m_boundary.center().y - m_boundary.height() * 0.5f);
+		glm::vec2 max = glm::vec2(m_boundary.center().x + m_boundary.width() * 0.5f, m_boundary.center().y + m_boundary.height() * 0.5f);
+
+		renderer->setRenderColour(0.0f, 0.0f, 0.0f, 1.0f);
+		renderer->drawLine(min.x, min.y, max.x, min.y, 3, 0); //bottom
+		renderer->drawLine(max.x, min.y, max.x, max.y, 3, 0); //right
+		renderer->drawLine(max.x, max.y, min.x, max.y, 3, 0); //top
+		renderer->drawLine(min.x, max.y, min.x, min.y, 3, 0); //left
+
+		if (m_divided)
+		{
+			NW->draw(renderer);
+			NE->draw(renderer);
+			SW->draw(renderer);
+			SE->draw(renderer);
+		}
 	}
 }

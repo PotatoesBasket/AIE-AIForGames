@@ -37,10 +37,22 @@ public:
 	bool getSleepState() { return m_isSleeping; }
 	void setSleepState(bool state) { m_isSleeping = state; }
 	float getRespawnTimer() { return m_respawnTimer; }
-	bool canSpawn() { return m_respawnTimer > m_respawnDelay && getStats()->getAge().currentPercent > m_matureAge; }
+	bool canSpawn() { return m_respawnTimer > m_respawnDelay && getStats()->getAge()->currentPercent > m_matureAge; }
 	void resetRespawnTimer() { m_respawnTimer = 0; }
 
 	virtual void spawnNew() = 0;
+
+	//animating behaviours
+	enum class AnimState
+	{
+		WANDER,
+		SLEEP,
+		FLEE,
+		GOTOFOOD,
+		GOTOMATE
+	};
+
+	AnimState currAnimState = AnimState::WANDER;
 
 	//pathing
 	virtual Node* getNearestFood() = 0;

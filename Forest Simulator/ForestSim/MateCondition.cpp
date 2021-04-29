@@ -3,7 +3,7 @@
 
 IBehaviour::Result MateCondition::update(Agent* agent, float deltaTime)
 {
-	if (agent->getStats()->getAge().currentPercent > agent->getMatureAge() && agent->canSpawn())
+	if (agent->getStats()->getAge()->currentPercent > agent->getMatureAge() && agent->canSpawn())
 	{
 		Node* mate = agent->getNearestMate();
 

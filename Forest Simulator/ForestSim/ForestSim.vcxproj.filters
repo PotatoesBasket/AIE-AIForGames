@@ -153,6 +153,9 @@
     <ClCompile Include="SpawnBehaviour.cpp">
       <Filter>Behaviours\Actions\Life</Filter>
     </ClCompile>
+    <ClCompile Include="DebugManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ForestSimApp.h">
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="SpawnBehaviour.h">
       <Filter>Behaviours\Actions\Life</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

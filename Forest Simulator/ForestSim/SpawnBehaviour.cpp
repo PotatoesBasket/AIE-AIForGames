@@ -1,6 +1,7 @@
 #include "SpawnBehaviour.h"
 #include "Agent.h"
 #include "Map.h"
+#include "DebugManager.h"
 
 IBehaviour::Result SpawnBehaviour::update(Agent* agent, float deltaTime)
 {
@@ -13,5 +14,7 @@ IBehaviour::Result SpawnBehaviour::update(Agent* agent, float deltaTime)
 	agent->setVelocity(glm::vec2(0, 0));
 	agent->resetRespawnTimer();
 	agent->spawnNew();
+
+	DebugManager::current().noOfSpawning++;
 	return Result::SUCCESS;
 }

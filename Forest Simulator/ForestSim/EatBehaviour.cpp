@@ -1,6 +1,7 @@
 #include "EatBehaviour.h"
 #include "Agent.h"
 #include "Grass.h"
+#include "DebugManager.h"
 
 IBehaviour::Result EatBehaviour::update(Agent* agent, float deltaTime)
 {
@@ -26,7 +27,8 @@ IBehaviour::Result EatBehaviour::update(Agent* agent, float deltaTime)
 
 	// keep agent still and reduce hunger to 0
 	agent->setVelocity(glm::vec2(0, 0));
-	agent->getStats()->getHunger().reset();
+	agent->getStats()->getHunger()->reset();
 
+	DebugManager::current().noOfEating++;
 	return Result::SUCCESS;
 }

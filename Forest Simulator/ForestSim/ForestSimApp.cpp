@@ -21,8 +21,10 @@ bool ForestSimApp::startup()
 void ForestSimApp::update(float deltaTime)
 {
 	camControls(cappedDeltaTime(deltaTime));
-
 	m_map->update(cappedDeltaTime(deltaTime));
+
+	m_debug.getInput();
+	m_debug.printData();
 }
 
 void ForestSimApp::draw()
@@ -52,14 +54,14 @@ void ForestSimApp::initCamera()
 
 void ForestSimApp::camControls(float deltaTime)
 {
-	aie::Input* input = aie::Input::getInstance();
+	aie::Input* getInput = aie::Input::getInstance();
 
 	// press escape to quit
-	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
+	if (getInput->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
 
 	// press space to toggle zoom
-	if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+	if (getInput->isKeyDown(aie::INPUT_KEY_SPACE))
 		m_zoomInputPressed = true;
 	else if (m_zoomInputPressed)
 	{
@@ -83,21 +85,21 @@ void ForestSimApp::camControls(float deltaTime)
 	}
 
 	// left/right pan
-	if (input->isKeyDown(aie::INPUT_KEY_A) || input->isKeyDown(aie::INPUT_KEY_LEFT))
+	if (getInput->isKeyDown(aie::INPUT_KEY_A) || getInput->isKeyDown(aie::INPUT_KEY_LEFT))
 		m_camPos.x -= m_currentPanSpeed * deltaTime;
 
-	else if (input->isKeyDown(aie::INPUT_KEY_D) || input->isKeyDown(aie::INPUT_KEY_RIGHT))
+	else if (getInput->isKeyDown(aie::INPUT_KEY_D) || getInput->isKeyDown(aie::INPUT_KEY_RIGHT))
 		m_camPos.x += m_currentPanSpeed * deltaTime;
 
 	// up/down pan
-	if (input->isKeyDown(aie::INPUT_KEY_S) || input->isKeyDown(aie::INPUT_KEY_DOWN))
+	if (getInput->isKeyDown(aie::INPUT_KEY_S) || getInput->isKeyDown(aie::INPUT_KEY_DOWN))
 		m_camPos.y -= m_currentPanSpeed * deltaTime;
 
-	else if (input->isKeyDown(aie::INPUT_KEY_W) || input->isKeyDown(aie::INPUT_KEY_UP))
+	else if (getInput->isKeyDown(aie::INPUT_KEY_W) || getInput->isKeyDown(aie::INPUT_KEY_UP))
 		m_camPos.y += m_currentPanSpeed * deltaTime;
 
 	// hold shift to speed up camera panning
-	if (input->isKeyDown(aie::INPUT_KEY_LEFT_SHIFT) || input->isKeyDown(aie::INPUT_KEY_RIGHT_SHIFT))
+	if (getInput->isKeyDown(aie::INPUT_KEY_LEFT_SHIFT) || getInput->isKeyDown(aie::INPUT_KEY_RIGHT_SHIFT))
 		m_currentPanSpeed = m_fastPanSpeed * m_2dRenderer->getCameraScale();
 	else
 		m_currentPanSpeed = m_panSpeed * m_2dRenderer->getCameraScale();

@@ -1,5 +1,11 @@
 #include "ResourceManager.h"
 
+ResourceManager& ResourceManager::getInstance()
+{
+	static ResourceManager instance;
+	return instance;
+}
+
 std::shared_ptr<ResourceBase> ResourceManager::loadFont(const std::string filename, int size)
 {
 	//check if already loaded
