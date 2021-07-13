@@ -49,7 +49,7 @@ void ForestSimApp::initCamera()
 		(m_map->getMapHeightPx() - SCR_HEIGHT) * 0.5f);
 
 	// set initial camera scale to medium zoom
-	m_2dRenderer->setCameraScale(1.0f);
+	m_2dRenderer->setCameraScale(1.5f);
 }
 
 void ForestSimApp::camControls(float deltaTime)
@@ -60,29 +60,29 @@ void ForestSimApp::camControls(float deltaTime)
 	if (getInput->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
 
-	// press space to toggle zoom
-	if (getInput->isKeyDown(aie::INPUT_KEY_SPACE))
-		m_zoomInputPressed = true;
-	else if (m_zoomInputPressed)
-	{
-		m_zoomInputPressed = false;
+	//// press space to toggle zoom
+	//if (getInput->isKeyDown(aie::INPUT_KEY_SPACE))
+	//	m_zoomInputPressed = true;
+	//else if (m_zoomInputPressed)
+	//{
+	//	m_zoomInputPressed = false;
 
-		// set zoom and realign camera
-		switch (m_zoomLevel)
-		{
-		case 0:
-			m_2dRenderer->setCameraScale(1.0f);
-			++m_zoomLevel;
-			break;
-		case 1:
-			m_2dRenderer->setCameraScale(1.5f);
-			++m_zoomLevel;
-			break;
-		case 2:
-			m_2dRenderer->setCameraScale(0.5f);
-			m_zoomLevel = 0;
-		}
-	}
+	//	// set zoom and realign camera
+	//	switch (m_zoomLevel)
+	//	{
+	//	case 0:
+	//		m_2dRenderer->setCameraScale(1.0f);
+	//		++m_zoomLevel;
+	//		break;
+	//	case 1:
+	//		m_2dRenderer->setCameraScale(1.5f);
+	//		++m_zoomLevel;
+	//		break;
+	//	case 2:
+	//		m_2dRenderer->setCameraScale(0.5f);
+	//		m_zoomLevel = 0;
+	//	}
+	//}
 
 	// left/right pan
 	if (getInput->isKeyDown(aie::INPUT_KEY_A) || getInput->isKeyDown(aie::INPUT_KEY_LEFT))

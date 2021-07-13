@@ -35,7 +35,7 @@ protected:
 	float m_currentPanSpeed = 0.0f;
 	const float m_panSpeed = 400.0f;
 	const float m_fastPanSpeed = 1000.0f;
-	unsigned int m_zoomLevel = 1;
+	unsigned int m_zoomLevel = 2;
 
 	bool m_zoomInputPressed = false;
 };
